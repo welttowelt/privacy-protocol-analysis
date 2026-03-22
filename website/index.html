@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Protocol Grid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="container">
+    <h1>Privacy Protocol Grid</h1>
+    <p class="subtitle">Community-maintained overview &bull; March 2026 &bull; Verified against official documentation</p>
+    <p class="intro">An open resource mapping privacy capabilities across crypto protocols. Who is building what, what works today, and where the gaps are &mdash; documented with sources, maintained by the community.</p>
+    <div class="hero-actions">
+      <a href="https://github.com/welttowelt/privacy-protocol-analysis" class="btn btn-primary" target="_blank" rel="noopener">View on GitHub</a>
+      <a href="https://github.com/welttowelt/privacy-protocol-analysis/issues/new" class="btn btn-secondary" target="_blank" rel="noopener">Suggest a change</a>
+    </div>
+  </div>
+</header>
+
+<!-- Contribute banner -->
+<section class="contribute-banner">
+  <div class="container">
+    <p>This grid is maintained by the community. Protocol teams, researchers, and users can <a href="https://github.com/welttowelt/privacy-protocol-analysis/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">submit changes</a> via GitHub. Every entry should be sourced and verifiable.</p>
+  </div>
+</section>
+
+<!-- Tab toggle -->
+<section class="grid-section">
+  <div class="container">
+    <div class="tab-bar">
+      <button class="tab active" data-tab="full">Full Grid <span class="tab-badge">17 properties</span></button>
+      <button class="tab" data-tab="glance">At a Glance <span class="tab-badge">6 properties</span></button>
+    </div>
+
+    <!-- Full grid -->
+    <div class="grid-wrapper" id="tab-full">
+      <div class="grid-scroll">
+        <table class="protocol-grid" id="full-grid">
+          <thead>
+            <tr class="category-row">
+              <th class="sticky-col"></th>
+              <th colspan="5" class="cat-header">Privacy Model</th>
+              <th colspan="3" class="cat-header">Cryptographic Foundation</th>
+              <th colspan="4" class="cat-header">Performance &amp; UX</th>
+              <th colspan="5" class="cat-header">Ecosystem &amp; Access</th>
+            </tr>
+            <tr class="header-row">
+              <th class="sticky-col">Protocol</th>
+              <th>Multi-asset<br>privacy pool</th>
+              <th>Formally ZK<br>proofs</th>
+              <th>Secretless<br>(no per-note keys)</th>
+              <th>Efficient note<br>discovery</th>
+              <th>Selective<br>disclosure</th>
+              <th>No trusted<br>setup</th>
+              <th>Post-quantum<br>proof system</th>
+              <th>Succinct<br>verifiability</th>
+              <th>Fast shield/<br>unshield</th>
+              <th>End-to-end<br>transaction time</th>
+              <th>Scalable private<br>transactions</th>
+              <th>Programmable<br>privacy</th>
+              <th>DeFi<br>composability</th>
+              <th>Existing<br>ecosystem</th>
+              <th>EVM<br>compatible</th>
+              <th>Account<br>abstraction</th>
+              <th>Hardware wallet<br>support</th>
+            </tr>
+            <tr class="def-row">
+              <th class="sticky-col"></th>
+              <td>one pool hides all token types</td>
+              <td>ZK property formally proven</td>
+              <td>one key, no secrets to lose</td>
+              <td>find your funds fast</td>
+              <td>reveal only what you choose</td>
+              <td>no ceremony, no trust needed</td>
+              <td>safe from quantum computers</td>
+              <td>anyone can verify the chain</td>
+              <td>go private or public in seconds</td>
+              <td>proof + confirmation speed</td>
+              <td>high throughput, low cost</td>
+              <td>complex DeFi ops, fully private</td>
+              <td>works with existing protocols</td>
+              <td>real users, real liquidity</td>
+              <td>runs on EVM chains</td>
+              <td>multisig, recovery, session keys</td>
+              <td>sign with Ledger/Trezor</td>
+            </tr>
+          </thead>
+          <tbody id="full-grid-body"></tbody>
+        </table>
+      </div>
+      <div class="legend">
+        <span class="legend-item"><span class="tick-full">&check;</span> = has this capability</span>
+        <span class="legend-item"><span class="tick-partial">(&check;)</span> = partially, with caveats</span>
+        <span class="legend-item"><span class="tick-dash">&ndash;</span> = not present</span>
+      </div>
+    </div>
+
+    <!-- At a glance grid -->
+    <div class="grid-wrapper hidden" id="tab-glance">
+      <div class="grid-scroll">
+        <table class="protocol-grid glance-grid" id="glance-grid">
+          <thead>
+            <tr class="header-row">
+              <th class="sticky-col">Protocol</th>
+              <th>Private by<br>design</th>
+              <th>Composable<br>funds</th>
+              <th>Fast to<br>use</th>
+              <th>Selective<br>disclosure</th>
+              <th>Future-proof<br>security</th>
+              <th>Wallet<br>ready</th>
+            </tr>
+            <tr class="def-row">
+              <th class="sticky-col"></th>
+              <td>is my stuff actually private?</td>
+              <td>can I use private funds freely?</td>
+              <td>is the experience fast?</td>
+              <td>can institutions use this legally?</td>
+              <td>will this still be secure in 5 years?</td>
+              <td>does my wallet work?</td>
+            </tr>
+          </thead>
+          <tbody id="glance-grid-body"></tbody>
+        </table>
+      </div>
+      <div class="legend">
+        <span class="legend-item"><span class="tick-full">&check;</span> = yes</span>
+        <span class="legend-item"><span class="tick-partial">(&check;)</span> = partially</span>
+        <span class="legend-item"><span class="tick-dash">&ndash;</span> = no</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footnotes -->
+<section class="footnotes-section">
+  <div class="container">
+    <details>
+      <summary>Footnotes <span class="footnote-count" id="footnote-count"></span></summary>
+      <div id="footnotes-full" class="footnotes-list">
+        <h4>Property Grid</h4>
+        <div id="footnotes-full-list"></div>
+      </div>
+      <div id="footnotes-glance" class="footnotes-list">
+        <h4>At a Glance</h4>
+        <div id="footnotes-glance-list"></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- Definitions -->
+<section class="definitions-section">
+  <div class="container">
+    <details>
+      <summary>Column Definitions</summary>
+      <div id="definitions-list"></div>
+    </details>
+  </div>
+</section>
+
+<!-- How to contribute -->
+<section class="how-to-contribute">
+  <div class="container">
+    <h2>How to contribute</h2>
+    <p>This grid is a community resource. Anyone can improve it.</p>
+    <div class="contribute-grid">
+      <div class="contribute-card">
+        <h3>Fix an entry</h3>
+        <p>Something wrong or outdated? Open a PR with the correction and a source link.</p>
+        <a href="https://github.com/welttowelt/privacy-protocol-analysis/pulls" target="_blank" rel="noopener">Open a PR &rarr;</a>
+      </div>
+      <div class="contribute-card">
+        <h3>Add a protocol</h3>
+        <p>Missing a privacy protocol? Add a new row with all 17 properties documented and sourced.</p>
+        <a href="https://github.com/welttowelt/privacy-protocol-analysis/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">See guidelines &rarr;</a>
+      </div>
+      <div class="contribute-card">
+        <h3>Propose a property</h3>
+        <p>Think a property is missing? Open an issue to discuss whether it belongs in the grid.</p>
+        <a href="https://github.com/welttowelt/privacy-protocol-analysis/issues/new" target="_blank" rel="noopener">Open an issue &rarr;</a>
+      </div>
+      <div class="contribute-card">
+        <h3>Challenge a caveat</h3>
+        <p>If a partial should be full (or vice versa), make the case with evidence.</p>
+        <a href="https://github.com/welttowelt/privacy-protocol-analysis/issues/new" target="_blank" rel="noopener">Start a discussion &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>Privacy Protocol Grid &mdash; <a href="https://github.com/welttowelt/privacy-protocol-analysis" target="_blank" rel="noopener">GitHub</a> &bull; MIT License</p>
+    <p class="footer-note">All data sourced from official documentation. <a href="https://github.com/welttowelt/privacy-protocol-analysis/issues/new" target="_blank" rel="noopener">Report an error</a>.</p>
+  </div>
+</footer>
+
+<!-- Tooltip -->
+<div class="tooltip" id="tooltip"></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

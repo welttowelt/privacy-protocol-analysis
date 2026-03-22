@@ -10,9 +10,9 @@ This grid exists so that builders, researchers, and users can see where things s
 
 | Category | Properties |
 |---|---|
-| **Privacy Model** | Multi-asset privacy pool, Formally ZK proofs, Secretless (no per-note keys), Efficient note discovery, Compliance (viewing keys) |
+| **Privacy Model** | Multi-asset privacy pool, Formally ZK proofs, Secretless (no per-note keys), Efficient note discovery, Selective disclosure |
 | **Cryptographic Foundation** | No trusted setup, Post-quantum proof system, Succinct verifiability |
-| **Performance & UX** | Fast shield/unshield, Fast proof generation, Scalable private transactions, Rich client-side proving |
+| **Performance & UX** | Fast shield/unshield, End-to-end transaction time, Scalable private transactions, Programmable privacy |
 | **Ecosystem & Access** | DeFi composability, Existing ecosystem, EVM compatible, Account abstraction, Hardware wallet support |
 
 ### Protocols covered
@@ -31,7 +31,18 @@ Every cell is one of three values:
 
 All entries are backed by footnotes citing official documentation. If something is wrong, open an issue or PR with a source.
 
-## How to run
+## Website
+
+The grid is also available as an interactive website in the `website/` directory. To run it locally:
+
+```bash
+cd website
+python3 -m http.server 8080
+```
+
+Then open `http://localhost:8080`.
+
+## Generate the xlsx
 
 ```bash
 pip install openpyxl
