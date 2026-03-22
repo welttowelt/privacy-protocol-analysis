@@ -87,3 +87,14 @@ document.addEventListener('mouseout', (e) => {
   const partial = e.target.closest('.tick-partial');
   if (partial) tooltip.classList.remove('visible');
 });
+
+// === Twitter/X share links ===
+const siteUrl = 'https://welttowelt.github.io/privacy-protocol-analysis/';
+
+const fullShareText = `Privacy Protocol Grid — 10 protocols, 17 properties, all sourced.\n\nWho\u2019s building what in crypto privacy.\n\n${siteUrl}`;
+const glanceShareText = `Privacy Protocols at a Glance — 10 protocols, 6 properties that matter most.\n\n${siteUrl}`;
+
+document.getElementById('share-full-twitter').href =
+  'https://x.com/intent/tweet?text=' + encodeURIComponent(fullShareText);
+document.getElementById('share-glance-twitter').href =
+  'https://x.com/intent/tweet?text=' + encodeURIComponent(glanceShareText);

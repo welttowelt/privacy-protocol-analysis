@@ -310,6 +310,48 @@ a:hover { text-decoration: underline; }
   gap: 6px;
 }
 
+/* === Share bar === */
+.share-bar {
+  display: flex;
+  gap: 10px;
+  padding: 12px 0 4px;
+  flex-wrap: wrap;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.download-btn {
+  background: var(--dark-secondary);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+.download-btn:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+  text-decoration: none;
+}
+
+.twitter-btn {
+  background: var(--dark-secondary);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+.twitter-btn:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+  text-decoration: none;
+}
+
 /* === Footnotes & Definitions === */
 .footnotes-section, .definitions-section {
   padding: 12px 0;
