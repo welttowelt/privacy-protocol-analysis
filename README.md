@@ -33,14 +33,14 @@ All entries are backed by footnotes citing official documentation. If something 
 
 ## Website
 
-The grid is also available as an interactive website in the `website/` directory. To run it locally:
+**Live:** [welttowelt.github.io/privacy-protocol-analysis](https://welttowelt.github.io/privacy-protocol-analysis/)
+
+The interactive website is in the `docs/` directory. To run it locally:
 
 ```bash
-cd website
+cd docs
 python3 -m http.server 8080
 ```
-
-Then open `http://localhost:8080`.
 
 ## Generate the xlsx
 
