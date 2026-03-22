@@ -493,6 +493,68 @@ summary:hover { color: var(--accent); }
   font-weight: 600;
 }
 
+/* === Build CTA === */
+.build-cta {
+  padding: 48px 0 56px;
+}
+
+.build-cta h2 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+.cta-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.cta-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--dark-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  transition: border-color 0.2s, background 0.2s;
+  text-decoration: none;
+}
+
+.cta-card:hover {
+  border-color: var(--accent);
+  background: rgba(255, 165, 80, 0.04);
+  text-decoration: none;
+}
+
+.cta-label {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.cta-desc {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  flex: 1;
+}
+
+.cta-arrow {
+  color: var(--accent);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-left: auto;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.cta-card:hover .cta-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 /* === Footer === */
 footer {
   border-top: 1px solid var(--border);
