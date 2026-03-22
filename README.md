@@ -58,6 +58,10 @@ Generates `privacy_feature_grid.xlsx` with 4 tabs:
 | **At a glance** | 6 condensed properties for a non-technical audience |
 | **Definitions & rationale 2** | How the 6 summary properties map to the full 17 |
 
+## Maintainers
+
+This grid is currently maintained by StarkWare employees. Contributions are open — anyone can submit issues and pull requests, and we review them on merit regardless of affiliation.
+
 ## Contributing
 
 This grid is only as good as the community keeping it accurate. Contributions are welcome from anyone — protocol teams, researchers, users.
