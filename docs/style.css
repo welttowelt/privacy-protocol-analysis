@@ -623,60 +623,75 @@ summary:hover { color: var(--accent); }
   letter-spacing: -0.01em;
 }
 
-.strk20-block {
-  margin-bottom: 8px;
-}
-
-.strk20-heading {
-  font-size: 1.1rem;
-  color: var(--accent);
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.build-intro {
-  color: var(--text-body);
-  font-size: 1rem;
-  max-width: 680px;
-  line-height: 1.7;
-}
-
-.featured-read {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 16px;
-  padding: 12px 20px;
+/* STRK20 builder block */
+.strk20-builder-block {
   background: var(--dark-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  text-decoration: none;
-  transition: border-color 0.2s, background 0.2s;
+  padding: 20px 24px;
+  margin-bottom: 20px;
 }
 
-.featured-read:hover {
-  border-color: var(--accent);
-  background: rgba(255, 165, 80, 0.04);
-  text-decoration: none;
+.strk20-builder-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
 }
 
-.featured-read-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--accent);
-}
-
-.featured-read-title {
-  color: var(--text);
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.featured-read-author {
-  color: var(--text-muted);
+.strk20-builder-tag {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(232, 106, 45, 0.1);
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+
+.strk20-builder-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.strk20-meta-sep {
+  color: var(--muted);
+}
+
+.strk20-builder-resources {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.strk20-builder-resources a {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-body);
+  transition: color 0.15s;
+  white-space: nowrap;
+}
+
+.strk20-builder-resources a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.strk20-builder-resources a::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--muted);
+  margin-right: 8px;
+  vertical-align: middle;
 }
 
 .build-intro strong {
