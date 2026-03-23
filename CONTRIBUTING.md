@@ -4,7 +4,7 @@ This is a community-maintained resource. The goal is an honest, well-sourced ove
 
 ## Principles
 
-1. **Cite your sources.** Every tick, partial tick, or dash should be traceable to official documentation, a protocol spec, or a verifiable on-chain fact. Link to the source in your PR description.
+1. **Cite your sources.** Every tick, partial tick, or dash should be traceable to official documentation, a protocol spec, or a verifiable onchain fact. Link to the source in your PR description.
 
 2. **Be accurate.** If a protocol doesn't have a capability yet, that's a dash — and that's fine. Partial ticks exist for real caveats, not for spin. The grid is more useful when it reflects reality.
 
