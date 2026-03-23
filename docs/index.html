@@ -279,10 +279,18 @@
         <div class="strk20-builder-tag">STRK20</div>
         <div class="strk20-builder-meta">
           <span class="strk20-meta-item">v0.14.2</span>
-          <span class="strk20-meta-sep">/</span>
-          <span class="strk20-meta-item">testnet March 23</span>
-          <span class="strk20-meta-sep">/</span>
-          <span class="strk20-meta-item">mainnet end of April</span>
+        </div>
+      </div>
+      <div class="strk20-status-row">
+        <div class="strk20-status strk20-status-live">
+          <span class="status-indicator status-green"></span>
+          <span class="status-label">TESTNET</span>
+          <span class="status-value">LIVE</span>
+        </div>
+        <div class="strk20-status strk20-status-upcoming">
+          <span class="status-indicator status-amber"></span>
+          <span class="status-label">MAINNET</span>
+          <span class="status-value" id="mainnet-countdown"></span>
         </div>
       </div>
       <div class="strk20-builder-resources">
@@ -335,5 +343,24 @@
 
 <script src="data.js"></script>
 <script src="app.js"></script>
+<script>
+// Bloomberg-style countdown to mainnet (April 20, 2026)
+(function() {
+  const target = new Date('2026-04-20T00:00:00Z').getTime();
+  const el = document.getElementById('mainnet-countdown');
+  function update() {
+    const now = Date.now();
+    const diff = target - now;
+    if (diff <= 0) { el.textContent = 'LIVE'; el.closest('.strk20-status').classList.add('strk20-status-live'); el.closest('.strk20-status').classList.remove('strk20-status-upcoming'); el.closest('.strk20-status').querySelector('.status-indicator').classList.replace('status-amber','status-green'); return; }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    el.textContent = String(d).padStart(2,'0') + 'D ' + String(h).padStart(2,'0') + 'H ' + String(m).padStart(2,'0') + 'M ' + String(s).padStart(2,'0') + 'S';
+  }
+  update();
+  setInterval(update, 1000);
+})();
+</script>
 </body>
 </html>
