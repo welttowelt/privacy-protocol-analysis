@@ -1,6 +1,8 @@
 # Privacy Protocol Grid
 
-An open, community-maintained overview of privacy protocols in crypto — who is building what, and how each approach works.
+**https://privacygrid.dev**
+
+An open overview of privacy protocols in crypto. Who is building what, and how each approach works.
 
 This grid exists so that builders, researchers, and users can see where things stand across the ecosystem — honestly, with sources — and figure out what still needs to be built.
 
