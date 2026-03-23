@@ -527,6 +527,44 @@ summary:hover { color: var(--accent); }
   line-height: 1.7;
 }
 
+.featured-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 12px 20px;
+  background: var(--dark-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.featured-read:hover {
+  border-color: var(--accent);
+  background: rgba(255, 165, 80, 0.04);
+  text-decoration: none;
+}
+
+.featured-read-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+.featured-read-title {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.featured-read-author {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
 .build-intro strong {
   color: var(--text);
 }
