@@ -493,6 +493,75 @@ summary:hover { color: var(--accent); }
   font-weight: 600;
 }
 
+/* === What is STRK20 === */
+.what-is-strk20 {
+  padding: 64px 0;
+  border-top: 1px solid var(--border);
+}
+
+.what-is-strk20 h2 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.strk20-lede {
+  color: var(--text-body);
+  font-size: 1.05rem;
+  max-width: 700px;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+.strk20-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.strk20-feature {
+  background: var(--dark-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.strk20-feature h4 {
+  color: var(--accent);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.strk20-feature p {
+  color: var(--text-body);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.strk20-honest {
+  background: var(--dark-alt);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  max-width: 720px;
+}
+
+.strk20-honest h4 {
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.strk20-honest p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
 /* === Build with STRK20 === */
 .build-strk20 {
   padding: 64px 0 56px;
