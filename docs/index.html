@@ -50,12 +50,16 @@
   </div>
 </header>
 
-<!-- Contribute banner -->
-<section class="contribute-banner">
-  <div class="container">
-    <p>Protocol teams, researchers, and users can <a href="https://github.com/welttowelt/privacy-protocol-analysis/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">submit changes</a> via GitHub. Every entry should be sourced and verifiable.</p>
+<!-- Status bar -->
+<div class="status-bar">
+  <div class="container status-bar-inner">
+    <span>SUBMIT CHANGES VIA <a href="https://github.com/welttowelt/privacy-protocol-analysis/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">GITHUB</a></span>
+    <span class="status-sep">&bull;</span>
+    <span>ALL ENTRIES SOURCED AND VERIFIABLE</span>
+    <span class="status-sep">&bull;</span>
+    <span>MARCH 2026</span>
   </div>
-</section>
+</div>
 
 <!-- Tab toggle -->
 <section class="grid-section">
@@ -214,29 +218,12 @@
 <!-- How to contribute -->
 <section class="how-to-contribute">
   <div class="container">
-    <h2>How to contribute</h2>
-    <p>Anyone can improve this grid.</p>
-    <div class="contribute-grid">
-      <div class="contribute-card">
-        <h3>Fix an entry</h3>
-        <p>Something wrong or outdated? Open a PR with the correction and a source link.</p>
-        <a href="https://github.com/welttowelt/privacy-protocol-analysis/pulls" target="_blank" rel="noopener">Open a PR &rarr;</a>
-      </div>
-      <div class="contribute-card">
-        <h3>Add a protocol</h3>
-        <p>Missing a privacy protocol? Add a new row with all 17 properties documented and sourced.</p>
-        <a href="https://github.com/welttowelt/privacy-protocol-analysis/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">See guidelines &rarr;</a>
-      </div>
-      <div class="contribute-card">
-        <h3>Propose a property</h3>
-        <p>Think a property is missing? Open an issue to discuss whether it belongs in the grid.</p>
-        <a href="https://github.com/welttowelt/privacy-protocol-analysis/issues/new" target="_blank" rel="noopener">Open an issue &rarr;</a>
-      </div>
-      <div class="contribute-card">
-        <h3>Challenge a caveat</h3>
-        <p>If a partial should be full (or vice versa), make the case with evidence.</p>
-        <a href="https://github.com/welttowelt/privacy-protocol-analysis/issues/new" target="_blank" rel="noopener">Start a discussion &rarr;</a>
-      </div>
+    <h2>Contribute</h2>
+    <div class="contribute-list">
+      <a href="https://github.com/welttowelt/privacy-protocol-analysis/pulls" target="_blank" rel="noopener"><span class="cl-cmd">Fix an entry</span><span class="cl-desc">Open a PR with the correction and a source</span></a>
+      <a href="https://github.com/welttowelt/privacy-protocol-analysis/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener"><span class="cl-cmd">Add a protocol</span><span class="cl-desc">New row, all 17 properties, sourced</span></a>
+      <a href="https://github.com/welttowelt/privacy-protocol-analysis/issues/new" target="_blank" rel="noopener"><span class="cl-cmd">Propose a property</span><span class="cl-desc">Open an issue to discuss</span></a>
+      <a href="https://github.com/welttowelt/privacy-protocol-analysis/issues/new" target="_blank" rel="noopener"><span class="cl-cmd">Challenge a caveat</span><span class="cl-desc">Make the case with evidence</span></a>
     </div>
   </div>
 </section>
@@ -244,39 +231,23 @@
 <!-- What is STRK20 -->
 <section class="what-is-strk20">
   <div class="container">
-    <h2>What is STRK20</h2>
-    <p class="strk20-lede">A Starknet-native privacy layer for ERC-20 tokens. Private balances and transfers live inside one canonical multi-asset pool.</p>
+    <div class="strk20-section-header">
+      <h2>What is STRK20</h2>
+      <p class="strk20-lede">Starknet-native privacy layer for ERC-20 tokens. One canonical multi-asset pool.</p>
+    </div>
 
-    <div class="strk20-features">
-      <div class="strk20-feature">
-        <h4>One pool, all tokens</h4>
-        <p>A single multi-asset privacy pool handles any ERC-20 on Starknet. No fragmented liquidity, no per-token pools.</p>
-      </div>
-      <div class="strk20-feature">
-        <h4>Note discovery</h4>
-        <p>Wallets scan a user&rsquo;s own channels instead of the entire pool. Finding your funds is fast without compromising privacy.</p>
-      </div>
-      <div class="strk20-feature">
-        <h4>Anonymous DeFi</h4>
-        <p>Open notes make anonymous swaps and staking practical against existing Starknet liquidity. Who traded is hidden &ndash; not the trade itself.</p>
-      </div>
-      <div class="strk20-feature">
-        <h4>Selective disclosure</h4>
-        <p>Encrypted viewing keys let an authorized entity audit a specific user&rsquo;s history without affecting anyone else. A path for regulated flows.</p>
-      </div>
-      <div class="strk20-feature">
-        <h4>Same account model</h4>
-        <p>Privacy fits inside the existing Starknet account and app ecosystem. No second wallet, no separate chain, no migration.</p>
-      </div>
-      <div class="strk20-feature">
-        <h4>Built on Cairo + STARKs</h4>
-        <p>Cairo-based proving, no trusted setup, in-protocol proof verification, native account abstraction. Privacy that is native to Starknet, not bolted on.</p>
-      </div>
+    <div class="strk20-defs">
+      <div class="strk20-def"><dt>One pool, all tokens</dt><dd>Single multi-asset pool for any ERC-20 on Starknet. No fragmented liquidity.</dd></div>
+      <div class="strk20-def"><dt>Note discovery</dt><dd>Wallets scan user channels, not the whole pool. Fast fund discovery without compromising privacy.</dd></div>
+      <div class="strk20-def"><dt>Anonymous DeFi</dt><dd>Open notes enable anonymous swaps against existing liquidity. Who traded is hidden, not the trade itself.</dd></div>
+      <div class="strk20-def"><dt>Selective disclosure</dt><dd>Viewing keys let an authorized entity audit one user without affecting others.</dd></div>
+      <div class="strk20-def"><dt>Same account model</dt><dd>No second wallet, no separate chain. Privacy inside the existing Starknet ecosystem.</dd></div>
+      <div class="strk20-def"><dt>Cairo + STARKs</dt><dd>No trusted setup, in-protocol proof verification, native account abstraction.</dd></div>
     </div>
 
     <div class="strk20-honest">
-      <h4>The honest trade</h4>
-      <p>This is practical privacy, not maximalist privacy. Deposits and withdrawals are public. Anonymous AMM swaps hide who traded, not the trade amounts. Selective disclosure adds an authorized audit path for regulated use.</p>
+      <span class="strk20-honest-label">Tradeoffs</span>
+      Practical privacy, not maximalist. Deposits/withdrawals are public. Anonymous swaps hide who traded, not amounts. Selective disclosure adds an audit path for regulated use.
     </div>
   </div>
 </section>
