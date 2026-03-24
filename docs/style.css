@@ -184,6 +184,23 @@ a:hover { text-decoration: underline; }
   padding: 32px 0 20px;
 }
 
+.grid-section > .container {
+  max-width: 100%;
+  padding: 0 24px;
+}
+
+@media (min-width: 1600px) {
+  .grid-section > .container {
+    padding: 0 40px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .grid-section > .container {
+    padding: 0 60px;
+  }
+}
+
 .tab-bar {
   display: flex;
   gap: 2px;
