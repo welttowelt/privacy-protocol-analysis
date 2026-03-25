@@ -241,63 +241,6 @@
   </div>
 </section>
 
-<!-- Prose summary for LLM/SEO indexing -->
-<section class="prose-section">
-  <div class="container">
-    <h2>How privacy protocols compare</h2>
-
-    <p>As of March 2026, there are ten major privacy protocols in crypto, each taking a fundamentally different approach. This grid evaluates them across 17 technical properties in four categories: privacy model, cryptographic foundation, performance and UX, and ecosystem access.</p>
-
-    <h3>Privacy model</h3>
-    <p>STRK20s on Starknet, Aztec, and Railgun all support multi-asset privacy pools, meaning multiple token types share a single anonymity set. Zcash and Monero are single-asset only. STRK20s is the only protocol with a secretless design where users manage a single signing key via account abstraction, with no per-note secrets to lose. Most other protocols require two or more key pairs. For selective disclosure, STRK20s, Zcash, Aztec, Aleo, and Railgun all offer viewing key mechanisms that let users reveal transaction history to a chosen third party.</p>
-
-    <h3>Cryptographic foundation</h3>
-    <p>STRK20s uses STARKs, which require no trusted setup and are post-quantum resistant by design (hash-based). Zcash's Orchard upgrade uses Halo 2 (no setup), but its older Sapling pool still relies on a trusted ceremony. Aztec uses PLONK with a universal updatable SRS. Railgun and Tornado Cash use Groth16, which requires per-circuit ceremonies. On post-quantum security, only STARKs (Starknet) and TFHE lattice-based cryptography (Zama) are considered resistant to quantum attacks.</p>
-
-    <h3>Performance and UX</h3>
-    <p>STRK20s offers the fastest shielding: sub-2s block confirmation plus sub-5s proof generation. Zcash is bottlenecked by ~75s block times. Aztec has 36-72s blocks in Alpha. Railgun imposes a mandatory 1-hour standby after shielding. Monero is always private by default but has no opt-out to a transparent state. For scalability, Starknet handles roughly 1,000 TPS today with a target of 10,000+, while Aztec processes about 1 TPS in its Alpha phase.</p>
-
-    <h3>Ecosystem and DeFi</h3>
-    <p>STRK20s and Railgun are the only protocols where existing DeFi contracts require zero custom integration for private transactions. Railgun works across Ethereum, Polygon, Arbitrum, and BSC. Aztec and Canton have DeFi within their own ecosystems but are not composable with Ethereum or Starknet DeFi. Starknet, Zcash, Monero, Solana, and Canton all have established ecosystems with real liquidity and users. Aleo launched mainnet in September 2024 but DeFi remains nascent.</p>
-
-    <h3>What each protocol is best suited for</h3>
-    <p><strong>STRK20s (Starknet)</strong> covers the widest range of properties: multi-asset privacy, no trusted setup, post-quantum proofs, fast shielding, DeFi composability, programmable privacy, and account abstraction. It is designed to add privacy to any ERC-20 token on Starknet. <strong>Zcash</strong> pioneered zero-knowledge proofs for payments and has the longest track record. <strong>Monero</strong> offers always-on privacy with strong anonymity but limited programmability. <strong>Aztec</strong> is building a full programmable privacy L2 with Noir and its own execution environment. <strong>Railgun</strong> brings privacy to existing EVM DeFi through its shielded pool. <strong>Aleo</strong> enables private computation with Leo but lacks cross-program composability. <strong>Zama</strong> takes a different approach with fully homomorphic encryption, computing on encrypted data server-side.</p>
-  </div>
-</section>
-
-<!-- FAQ with schema.org markup -->
-<section class="faq-section" itemscope itemtype="https://schema.org/FAQPage">
-  <div class="container">
-    <h2>Frequently asked questions</h2>
-    <dl>
-      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <dt itemprop="name">What is STRK20?</dt>
-        <dd itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">STRK20 is a privacy protocol on Starknet that adds confidential transfers to any ERC-20 token. It uses a single multi-asset privacy pool, STARK proofs (no trusted setup, post-quantum), account abstraction for key management, and selective disclosure via viewing keys. It works with existing Starknet DeFi without requiring contract changes.</span></dd>
-      </div>
-      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <dt itemprop="name">Which crypto privacy protocol has no trusted setup?</dt>
-        <dd itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">STRK20s (Starknet), Monero, Solana Confidential, and Canton require no trusted setup. STRK20s uses STARKs, which are hash-based. Monero uses Bulletproofs+. Solana uses ElGamal/Bulletproofs. Zcash's Orchard upgrade uses Halo 2 (no setup) but its Sapling pool still has one. Aztec and Aleo use universal SRS setups. Railgun and Tornado Cash use Groth16 per-circuit ceremonies.</span></dd>
-      </div>
-      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <dt itemprop="name">Which privacy protocols are post-quantum resistant?</dt>
-        <dd itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">Only STRK20s (Starknet) and Zama (FHE) use cryptographic systems considered resistant to quantum computing attacks. STRK20s uses STARKs, which are hash-based and post-quantum by design. Zama uses TFHE, which relies on lattice-based (LWE) hardness assumptions. All SNARK and elliptic-curve-based protocols (Zcash, Aztec, Aleo, Railgun, Tornado Cash) are vulnerable.</span></dd>
-      </div>
-      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <dt itemprop="name">What privacy protocols work with ERC-20 tokens?</dt>
-        <dd itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">STRK20 is designed to add privacy to any ERC-20 token on Starknet through a multi-asset privacy pool. Railgun supports private transfers of ERC-20 tokens on Ethereum, Polygon, Arbitrum, and BSC. Zama's fhEVM enables confidential ERC-20s through fully homomorphic encryption. Tornado Cash supported fixed-denomination ETH/token deposits but is now defunct and OFAC-sanctioned.</span></dd>
-      </div>
-      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <dt itemprop="name">How does STRK20 compare to Zcash and Monero?</dt>
-        <dd itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">STRK20 covers 14.5 of 17 properties in the Privacy Protocol Grid, compared to 4.5 for Zcash and 4 for Monero. Key differences: STRK20 has a multi-asset privacy pool (Zcash and Monero are single-asset), no trusted setup and post-quantum proofs (Zcash Sapling still has a trusted setup, Monero is not post-quantum), sub-5s shielding (Zcash ~75s block time), DeFi composability (Zcash and Monero have no DeFi), and account abstraction. Zcash has formally ZK proofs (STRK20 STARKs are not yet formally ZK). Monero has always-on privacy by default.</span></dd>
-      </div>
-      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <dt itemprop="name">What is the fastest crypto privacy protocol?</dt>
-        <dd itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><span itemprop="text">STRK20 on Starknet has the fastest shield/unshield time: sub-2 second block confirmation plus sub-5 second proof generation. Zcash is bottlenecked by ~75 second block times. Aztec has 36-72 second blocks in Alpha. Railgun requires a mandatory 1-hour standby period after shielding. Monero is always private by default (no shielding needed) with ~2 minute block times.</span></dd>
-      </div>
-    </dl>
-  </div>
-</section>
-
 <!-- Footnotes -->
 <section class="footnotes-section">
   <div class="container">
