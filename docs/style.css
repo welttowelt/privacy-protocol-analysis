@@ -445,6 +445,74 @@ a:hover { text-decoration: underline; }
   text-decoration: none;
 }
 
+/* === Prose summary (SEO) === */
+.prose-section {
+  padding: 40px 0 24px;
+  border-top: 1px solid var(--border);
+}
+
+.prose-section h2 {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 20px;
+}
+
+.prose-section h3 {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 20px 0 8px;
+}
+
+.prose-section p {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  max-width: 800px;
+}
+
+/* === FAQ (SEO) === */
+.faq-section {
+  padding: 24px 0 32px;
+  border-top: 1px solid var(--border);
+}
+
+.faq-section h2 {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+}
+
+.faq-item {
+  margin-bottom: 16px;
+}
+
+.faq-item dt {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.faq-item dd {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0;
+}
+
 /* === Footnotes & Definitions === */
 .footnotes-section, .definitions-section {
   padding: 12px 0;
