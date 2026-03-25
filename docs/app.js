@@ -22,8 +22,11 @@ function renderGrid(projects, bodyId) {
   }).join('');
 }
 
-renderGrid(fullProjects, 'full-grid-body');
-renderGrid(glanceProjects, 'glance-grid-body');
+// Only render if tbody is empty (static HTML already has rows for SEO)
+if (!document.getElementById('full-grid-body').children.length)
+  renderGrid(fullProjects, 'full-grid-body');
+if (!document.getElementById('glance-grid-body').children.length)
+  renderGrid(glanceProjects, 'glance-grid-body');
 
 // === Tabs ===
 document.querySelectorAll('.tab').forEach(tab => {
