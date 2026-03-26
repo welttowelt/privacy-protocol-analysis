@@ -5,7 +5,7 @@ function renderTick(tick, fnMap, colIdx) {
     return '<span class="tick-full">\u2713</span>';
   } else if (tick === "partial") {
     const fnNum = fnMap[colIdx];
-    const sup = fnNum && SUPERSCRIPTS[fnNum] ? `<sup>${SUPERSCRIPTS[fnNum]}</sup>` : '';
+    const sup = fnNum ? `<sup>${fnNum}</sup>` : '';
     return `<span class="tick-partial" data-fn="${fnNum || ''}">(&#x2713;)${sup}</span>`;
   }
   return '<span class="tick-dash">\u2013</span>';
@@ -44,8 +44,7 @@ function renderFootnotes(footnotes, containerId) {
   const container = document.getElementById(containerId);
   const sorted = Object.keys(footnotes).map(Number).sort((a, b) => a - b);
   container.innerHTML = sorted.map(n => {
-    const sup = SUPERSCRIPTS[n] || n;
-    return `<div class="footnote-item"><sup>${sup}</sup>${footnotes[n]}</div>`;
+    return `<div class="footnote-item"><sup>${n}</sup>${footnotes[n]}</div>`;
   }).join('');
 }
 
