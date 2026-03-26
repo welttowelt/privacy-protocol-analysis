@@ -371,7 +371,7 @@ a:hover { text-decoration: underline; }
 }
 
 .tick-partial sup {
-  font-size: 0.9rem;
+  font-size: 1.8rem;
   font-weight: 600;
   margin-left: 2px;
   vertical-align: super;
