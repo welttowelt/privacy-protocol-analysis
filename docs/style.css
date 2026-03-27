@@ -256,11 +256,11 @@ a:hover { text-decoration: underline; }
 .protocol-grid {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.82rem;
+  font-size: 1.1rem;
   min-width: 1200px;
 }
 
-.glance-grid { min-width: 700px; }
+.glance-grid { min-width: 900px; }
 
 /* Sticky first column */
 .sticky-col {
@@ -291,9 +291,9 @@ a:hover { text-decoration: underline; }
   background: var(--dark);
   color: var(--accent);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;
+  font-size: 1rem;
   font-weight: 600;
-  padding: 10px 8px;
+  padding: 16px 12px;
   border: 1px solid var(--border);
   text-align: center;
   vertical-align: middle;
@@ -304,17 +304,17 @@ a:hover { text-decoration: underline; }
   text-align: left;
   padding-left: 16px;
   background: var(--dark);
-  min-width: 180px;
+  min-width: 220px;
 }
 
 /* Definition row */
 .def-row th, .def-row td {
   background: var(--dark-def);
   color: var(--text-muted);
-  font-size: 0.68rem;
+  font-size: 0.9rem;
   font-style: italic;
   font-weight: 400;
-  padding: 6px 8px;
+  padding: 10px 12px;
   border: 1px solid var(--border);
   text-align: center;
   vertical-align: middle;
@@ -326,7 +326,7 @@ a:hover { text-decoration: underline; }
 .protocol-grid tbody tr { transition: background 0.15s; }
 
 .protocol-grid tbody td {
-  padding: 12px 10px;
+  padding: 18px 14px;
   border: 1px solid var(--border);
   text-align: center;
   vertical-align: middle;
@@ -337,7 +337,7 @@ a:hover { text-decoration: underline; }
   padding-left: 16px;
   font-weight: 600;
   white-space: nowrap;
-  min-width: 180px;
+  min-width: 220px;
 }
 
 /* Alternating rows */
@@ -359,13 +359,13 @@ a:hover { text-decoration: underline; }
 /* Tick styling */
 .tick-full {
   color: var(--accent);
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 700;
 }
 
 .tick-partial {
   color: var(--accent-dim);
-  font-size: 0.95rem;
+  font-size: 1.3rem;
   font-weight: 600;
   cursor: help;
 }
@@ -380,7 +380,7 @@ a:hover { text-decoration: underline; }
 
 .tick-dash {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 1.2rem;
 }
 
 /* Hover on rows (not highlighted) */
@@ -398,7 +398,7 @@ a:hover { text-decoration: underline; }
 
 .legend-item {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
   display: flex;
   align-items: center;
