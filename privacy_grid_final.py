@@ -102,6 +102,9 @@ footnotes = {
    22: "1-hour mandatory standby period after shielding before funds can be used privately (Private Proof of Innocence requirement)",
    23: "36\u201372s block times in Alpha. shielding speed will improve as block times target 3\u20134s by late 2026",
    24: "~5s end-to-end from user perspective, but proof runs on wallet operator backend (48-core machine). Zcash Zashi generates proofs directly on mobile in ~5s. for an apples-to-apples comparison, proof generation is not yet on consumer hardware. mobile proving on the roadmap",
+   26: "contract architecture supports ERC20 via registerAsset() with per-token asset IDs, but currently ETH-only. DenominationLib hardcodes 18-decimal denominations, blocking non-18-decimal tokens (USDC, USDT). ERC20 launch requires contract upgrade",
+   27: "inherits Base L2 scalability (~2s blocks), but fixed-denomination pools (0.001 to 100 ETH) limit throughput. no batched proof aggregation",
+   28: "works with any wallet supporting Base (MetaMask, Ledger, Trezor via Base chain). no dedicated privacy wallet integration. Blockaid may flag unverified contracts",
 }
 
 #                                          0     1     2     3     4     5     6     7     8     9    10    11    12    13    14    15    16
@@ -118,6 +121,7 @@ projects = [
     ("Canton", [False, False, False, False, True, True, False, False, False, False, "partial", False, "partial", True, False, False, False], False, {12: 10, 10: 11}),
     ("Tornado Cash", [False, True, False, False, False, False, False, False, False, False, False, False, False, False, True, False, False], False, {}),
     ("Zama (FHE)", ["partial", False, False, False, True, True, "partial", False, False, False, False, False, False, False, True, False, False], False, {0: 7, 6: 6}),
+    ("Ceaser (Base)", ["partial", True, False, True, False, True, False, True, True, True, "partial", False, False, False, True, False, "partial"], False, {0: 26, 10: 27, 16: 28}),
 ]
 
 ws.sheet_properties.tabColor = ORANGE
@@ -327,7 +331,7 @@ ws.cell(row=fn_start, column=1).fill = PatternFill('solid', fgColor=DARK)
 for col in range(1, len(features)+3):
     ws.cell(row=fn_start, column=col).fill = PatternFill('solid', fgColor=DARK)
 
-superscripts_display = {1: "\u00B9", 2: "\u00B2", 3: "\u00B3", 4: "\u2074", 5: "\u2075", 6: "\u2076", 7: "\u2077", 8: "\u2078", 9: "\u2079", 10: "\u00B9\u2070", 11: "\u00B9\u00B9", 12: "\u00B9\u00B2", 13: "\u00B9\u00B3", 14: "\u00B9\u2074", 15: "\u00B9\u2075", 16: "\u00B9\u2076", 17: "\u00B9\u2077", 18: "\u00B9\u2078", 19: "\u00B9\u2079", 20: "\u00B2\u2070", 21: "\u00B2\u00B9", 22: "\u00B2\u00B2", 23: "\u00B2\u00B3", 24: "\u00B2\u2074", 25: "\u00B2\u2075"}
+superscripts_display = {1: "\u00B9", 2: "\u00B2", 3: "\u00B3", 4: "\u2074", 5: "\u2075", 6: "\u2076", 7: "\u2077", 8: "\u2078", 9: "\u2079", 10: "\u00B9\u2070", 11: "\u00B9\u00B9", 12: "\u00B9\u00B2", 13: "\u00B9\u00B3", 14: "\u00B9\u2074", 15: "\u00B9\u2075", 16: "\u00B9\u2076", 17: "\u00B9\u2077", 18: "\u00B9\u2078", 19: "\u00B9\u2079", 20: "\u00B2\u2070", 21: "\u00B2\u00B9", 22: "\u00B2\u00B2", 23: "\u00B2\u00B3", 24: "\u00B2\u2074", 25: "\u00B2\u2075", 26: "\u00B2\u2076", 27: "\u00B2\u2077", 28: "\u00B2\u2078"}
 
 for fn_num in sorted(footnotes.keys()):
     row = fn_start + fn_num
@@ -436,6 +440,7 @@ mkt_projects = [
     ("Canton", [False, "partial", False, True, False, False], False, {1: 13}),
     ("Tornado Cash", ["partial", False, False, False, False, False], False, {0: 15}),
     ("Zama (FHE)", ["partial", False, False, True, "partial", False], False, {0: 16, 4: 14}),
+    ("Ceaser (Base)", ["partial", False, True, False, False, "partial"], False, {0: 18, 5: 19}),
 ]
 
 mkt_footnotes = {
@@ -456,9 +461,11 @@ mkt_footnotes = {
     15: "formally ZK (Groth16), but fragmented pools (fixed denominations), timing analysis could de-anonymize users, and protocol is OFAC-sanctioned/defunct",
     16: "FHE genuinely encrypts data during computation, but server-side model (not client-side ZK proofs). different trust model. ecosystem nascent",
     17: "privacy is always on so there\u2019s no shielding step (zero friction to opt in). ~2 min block time for confirmations. seamless UX but slower than Starknet",
+    18: "formally ZK (UltraHonk/Noir), EVM-native on Base L2, fast shield/unshield (~2s blocks), but currently ETH-only with fixed denominations. no programmable privacy or DeFi composability",
+    19: "works with any Base-compatible wallet (MetaMask, Ledger, Trezor). no dedicated hardware wallet integration for private transactions",
 }
 
-mkt_superscripts = {1: "\u00B9", 2: "\u00B2", 3: "\u00B3", 4: "\u2074", 5: "\u2075", 6: "\u2076", 7: "\u2077", 8: "\u2078", 9: "\u2079", 10: "\u00B9\u2070", 11: "\u00B9\u00B9", 12: "\u00B9\u00B2", 13: "\u00B9\u00B3", 14: "\u00B9\u2074", 15: "\u00B9\u2075", 16: "\u00B9\u2076", 17: "\u00B9\u2077"}
+mkt_superscripts = {1: "\u00B9", 2: "\u00B2", 3: "\u00B3", 4: "\u2074", 5: "\u2075", 6: "\u2076", 7: "\u2077", 8: "\u2078", 9: "\u2079", 10: "\u00B9\u2070", 11: "\u00B9\u00B9", 12: "\u00B9\u00B2", 13: "\u00B9\u00B3", 14: "\u00B9\u2074", 15: "\u00B9\u2075", 16: "\u00B9\u2076", 17: "\u00B9\u2077", 18: "\u00B9\u2078", 19: "\u00B9\u2079"}
 
 NCOLS = len(mkt_features) + 1
 
@@ -679,5 +686,5 @@ for r in range(dr_header + 1 + len(mkt_definitions), dr_header + 1 + len(mkt_def
     for c in range(1, 4):
         ws4.cell(row=r, column=c).fill = PatternFill('solid', fgColor=DARK)
 
-wb.save('/home/claude/privacy_feature_grid_final.xlsx')
+wb.save('privacy_feature_grid_final.xlsx')
 print("Done")
