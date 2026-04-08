@@ -397,7 +397,7 @@
 <!-- Tooltip -->
 <div class="tooltip" id="tooltip"></div>
 
-<script src="data.js?v=3"></script>
+<script src="data.js?v=4"></script>
 <script src="app.js?v=3"></script>
 <script>
 // Bloomberg-style countdown to mainnet (April 20, 2026)
@@ -428,7 +428,7 @@
   <h3>Cryptographic foundation</h3>
   <p>STRK20s uses STARKs, which require no trusted setup and are post-quantum resistant by design (hash-based). Zcash's Orchard upgrade uses Halo 2 (no setup), but its older Sapling pool still relies on a trusted ceremony. Aztec uses PLONK with a universal updatable SRS. Railgun and Tornado Cash use Groth16, which requires per-circuit ceremonies. On post-quantum security, only STARKs (Starknet) and TFHE lattice-based cryptography (Zama) are considered resistant to quantum attacks.</p>
   <h3>Performance and UX</h3>
-  <p>STRK20s offers the fastest shielding: sub-2s block confirmation plus sub-5s proof generation. Zcash is bottlenecked by ~75s block times. Aztec has 36-72s blocks in Alpha. Railgun imposes a mandatory 1-hour standby after shielding. Monero is always private by default but has no opt-out to a transparent state. For scalability, Starknet handles roughly 1,000 TPS today with a target of 10,000+, while Aztec processes about 1 TPS in its Alpha phase.</p>
+  <p>STRK20s offers the fastest shielding: ~2s block confirmation plus sub-5s proof generation. Zcash is bottlenecked by ~75s block times. Aztec runs ~6s blocks in Alpha Mainnet (launched March 31, 2026). Railgun imposes a mandatory 1-hour standby after shielding. Monero is always private by default but has no opt-out to a transparent state. For scalability, Starknet handles roughly 1,000 TPS today with a target of 10,000+, while Aztec processes about 1 TPS in its Alpha phase.</p>
   <h3>Ecosystem and DeFi</h3>
   <p>STRK20s and Railgun are the only protocols where existing DeFi contracts require zero custom integration for private transactions. Railgun works across Ethereum, Polygon, Arbitrum, and BSC. Aztec and Canton have DeFi within their own ecosystems but are not composable with Ethereum or Starknet DeFi. Starknet, Zcash, Monero, Solana, and Canton all have established ecosystems with real liquidity and users.</p>
   <h3>What each protocol is best suited for</h3>
@@ -458,7 +458,7 @@
   </div>
   <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
     <h3 itemprop="name">What is the fastest crypto privacy protocol?</h3>
-    <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><p itemprop="text">STRK20 on Starknet has the fastest shield/unshield time: sub-2 second block confirmation plus sub-5 second proof generation. Zcash is bottlenecked by ~75 second block times. Aztec has 36-72 second blocks in Alpha. Railgun requires a mandatory 1-hour standby period after shielding.</p></div>
+    <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><p itemprop="text">STRK20 on Starknet has the fastest shield/unshield time: ~2 second block confirmation plus sub-5 second proof generation. Zcash is bottlenecked by ~75 second block times. Aztec has ~6 second blocks in Alpha Mainnet (launched March 31, 2026). Railgun requires a mandatory 1-hour standby period after shielding.</p></div>
   </div>
 </section>
 </div>
