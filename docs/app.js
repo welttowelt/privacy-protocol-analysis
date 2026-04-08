@@ -64,14 +64,19 @@ defList.innerHTML = definitions.map(group => {
 }).join('');
 
 // === Tooltip on partial ticks ===
+// Full grid and glance grid reuse the same footnote numbers (1–17) to
+// reference different text. Look up from the correct table based on which
+// grid the tick belongs to, otherwise tooltips for overlapping numbers
+// would show the wrong footnote.
 const tooltip = document.getElementById('tooltip');
-const allFootnotes = { ...fullFootnotes, ...glanceFootnotes };
 
 document.addEventListener('mouseover', (e) => {
   const partial = e.target.closest('.tick-partial');
   if (!partial) return;
   const fnNum = parseInt(partial.dataset.fn);
-  const text = allFootnotes[fnNum];
+  if (!fnNum) return;
+  const footnotes = partial.closest('.glance-grid') ? glanceFootnotes : fullFootnotes;
+  const text = footnotes[fnNum];
   if (!text) return;
   tooltip.textContent = text;
   tooltip.classList.add('visible');
