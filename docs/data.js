@@ -1,4 +1,4 @@
-// Full grid data — 17 properties x 10 protocols
+// Full grid data — 17 properties x 11 protocols
 // Source of truth: privacy_grid_final.py
 
 const SUPERSCRIPTS = {1:"\u00B9",2:"\u00B2",3:"\u00B3",4:"\u2074",5:"\u2075",6:"\u2076",7:"\u2077",8:"\u2078",9:"\u2079",10:"\u00B9\u2070",11:"\u00B9\u00B9",12:"\u00B9\u00B2",13:"\u00B9\u00B3",14:"\u00B9\u2074",15:"\u00B9\u2075",16:"\u00B9\u2076",17:"\u00B9\u2077",18:"\u00B9\u2078",19:"\u00B9\u2079",20:"\u00B2\u2070",21:"\u00B2\u00B9",22:"\u00B2\u00B2",23:"\u00B2\u00B3",24:"\u00B2\u2074"};
@@ -34,6 +34,9 @@ const fullProjects = [
   { name: "Zama (FHE)",
     ticks: ["partial", false, false, false, true, true, "partial", false, false, false, false, false, false, false, true, false, false],
     fnMap: {0: 7, 6: 6} },
+  { name: "Tempo",
+    ticks: [false, false, false, false, true, false, false, false, "partial", "partial", "partial", false, false, "partial", true, true, false],
+    fnMap: {8: 19, 9: 19, 10: 20, 13: 22} },
 ];
 
 const fullFootnotes = {
@@ -55,12 +58,15 @@ const fullFootnotes = {
   16: "can outsource to Prover Market (Proof-as-a-Service). client-side proving possible but resource-intensive",
   17: "Ledger supports Solana but confidential transfer feature is currently disabled on mainnet",
   18: "Orchard proofs ~2\u20135s on modern hardware, but limited to simple shielded transfer logic",
+  19: "sub-second finality on the base layer (Simplex BFT), but private transaction speed not separately benchmarked. mainnet launched March 18, 2026",
+  20: "base layer targets 100K+ TPS on Reth execution, but private transaction throughput not separately disclosed",
   21: "always private by default. no shielding needed (instant opt-in), but no way to opt-out to a transparent state",
+  22: "major design partners (Stripe, Visa, Mastercard, Deutsche Bank, Anthropic, OpenAI) but mainnet just launched March 18, 2026 \u2014 live ecosystem still nascent",
   23: "36\u201372s block times in Alpha. shielding speed will improve as block times target 3\u20134s by late 2026",
   24: "~5s end-to-end from user perspective, but proof runs on wallet operator backend (48-core machine). Zcash Zashi generates proofs directly on mobile in ~5s. for an apples-to-apples comparison, proof generation is not yet on consumer hardware. mobile proving on the roadmap",
 };
 
-// At-a-glance data — 6 properties x 10 protocols
+// At-a-glance data — 6 properties x 11 protocols
 const glanceProjects = [
   { name: "STRK20s (Starknet)", highlight: true,
     ticks: [true, true, true, true, true, "partial"],
@@ -92,6 +98,9 @@ const glanceProjects = [
   { name: "Zama (FHE)",
     ticks: ["partial", false, false, true, "partial", false],
     fnMap: {0: 16, 4: 14} },
+  { name: "Tempo",
+    ticks: ["partial", false, "partial", true, false, "partial"],
+    fnMap: {0: 18, 2: 19, 5: 20} },
 ];
 
 const glanceFootnotes = {
@@ -112,6 +121,9 @@ const glanceFootnotes = {
   15: "formally ZK (Groth16), but fragmented pools (fixed denominations), timing analysis could de-anonymize users, and protocol is OFAC-sanctioned/defunct",
   16: "FHE genuinely encrypts data during computation, but server-side model (not client-side ZK proofs). different trust model. ecosystem nascent",
   17: "privacy is always on so there\u2019s no shielding step (zero friction to opt in). ~2 min block time for confirmations. seamless UX but slower than Starknet",
+  18: "opt-in privacy, not private by default. privacy cryptography not publicly documented. uses TIP-403 Policy Registry for issuer compliance and auditability",
+  19: "sub-second finality on base layer via Simplex BFT consensus, but private transaction speed not separately benchmarked",
+  20: "native account abstraction with passkeys (P256) and MetaMask at launch, but no hardware wallet path published for confidential transfers",
 };
 
 // Column definitions grouped by category

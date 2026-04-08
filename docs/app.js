@@ -98,8 +98,8 @@ document.addEventListener('mouseout', (e) => {
 // === Twitter/X share links ===
 const siteUrl = 'https://privacygrid.dev/';
 
-const fullShareText = `Privacy Protocol Grid — 10 protocols, 17 properties, all sourced.\n\nWho\u2019s building what in crypto privacy.\n\n${siteUrl}`;
-const glanceShareText = `Privacy Protocols at a Glance — 10 protocols, 6 properties that matter most.\n\n${siteUrl}`;
+const fullShareText = `Privacy Protocol Grid — 11 protocols, 17 properties, all sourced.\n\nWho\u2019s building what in crypto privacy.\n\n${siteUrl}`;
+const glanceShareText = `Privacy Protocols at a Glance — 11 protocols, 6 properties that matter most.\n\n${siteUrl}`;
 
 document.getElementById('share-full-twitter').href =
   'https://x.com/intent/tweet?text=' + encodeURIComponent(fullShareText);
