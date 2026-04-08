@@ -8,7 +8,7 @@ This grid exists so that builders, researchers, and users can see where things s
 
 ## What's in the grid
 
-**10 protocols** across **17 properties** in 4 categories:
+**11 protocols** across **17 properties** in 4 categories:
 
 | Category | Properties |
 |---|---|
@@ -19,7 +19,7 @@ This grid exists so that builders, researchers, and users can see where things s
 
 ### Protocols covered
 
-STRK20s (Starknet) · Zcash · Monero · Aztec · Aleo · Railgun · Solana Confidential · Canton · Tornado Cash · Zama (FHE)
+STRK20s (Starknet) · Zcash · Monero · Aztec · Aleo · Railgun · Solana Confidential · Canton · Tornado Cash · Zama (FHE) · Tempo
 
 **Missing a protocol?** Open a PR to add it.
 
@@ -35,30 +35,18 @@ All entries are backed by footnotes citing official documentation. If something 
 
 ## Website
 
-**Live:** [welttowelt.github.io/privacy-protocol-analysis](https://welttowelt.github.io/privacy-protocol-analysis/)
+**Live:** [privacygrid.dev](https://privacygrid.dev/)
 
-The interactive website is in the `docs/` directory. To run it locally:
+The interactive website lives in the `docs/` directory.
+
+`docs/data.js` is the source of truth for the grid data, footnotes, and definitions.
+
+To run it locally:
 
 ```bash
 cd docs
 python3 -m http.server 8080
 ```
-
-## Generate the xlsx
-
-```bash
-pip install openpyxl
-python privacy_grid_final.py
-```
-
-Generates `privacy_feature_grid.xlsx` with 4 tabs:
-
-| Tab | What it contains |
-|---|---|
-| **Property Grid** | Full technical overview with footnotes |
-| **Definitions & rationale** | What each property means and how each protocol was evaluated |
-| **At a glance** | 6 condensed properties for a non-technical audience |
-| **Definitions & rationale 2** | How the 6 summary properties map to the full 17 |
 
 ## Maintainers
 

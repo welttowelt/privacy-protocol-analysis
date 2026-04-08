@@ -22,11 +22,9 @@ function renderGrid(projects, bodyId) {
   }).join('');
 }
 
-// Only render if tbody is empty (static HTML already has rows for SEO)
-if (!document.getElementById('full-grid-body').children.length)
-  renderGrid(fullProjects, 'full-grid-body');
-if (!document.getElementById('glance-grid-body').children.length)
-  renderGrid(glanceProjects, 'glance-grid-body');
+// Always render from the data file so the tables stay in sync.
+renderGrid(fullProjects, 'full-grid-body');
+renderGrid(glanceProjects, 'glance-grid-body');
 
 // === Tabs ===
 document.querySelectorAll('.tab').forEach(tab => {
@@ -97,9 +95,12 @@ document.addEventListener('mouseout', (e) => {
 
 // === Twitter/X share links ===
 const siteUrl = 'https://privacygrid.dev/';
+const fullProtocolCount = fullProjects.length;
+const fullPropertyCount = fullProjects[0]?.ticks.length || 0;
+const glancePropertyCount = glanceProjects[0]?.ticks.length || 0;
 
-const fullShareText = `Privacy Protocol Grid — 11 protocols, 17 properties, all sourced.\n\nWho\u2019s building what in crypto privacy.\n\n${siteUrl}`;
-const glanceShareText = `Privacy Protocols at a Glance — 11 protocols, 6 properties that matter most.\n\n${siteUrl}`;
+const fullShareText = `Privacy Protocol Grid — ${fullProtocolCount} protocols, ${fullPropertyCount} properties, all sourced.\n\nWho\u2019s building what in crypto privacy.\n\n${siteUrl}`;
+const glanceShareText = `Privacy Protocols at a Glance — ${fullProtocolCount} protocols, ${glancePropertyCount} properties that matter most.\n\n${siteUrl}`;
 
 document.getElementById('share-full-twitter').href =
   'https://x.com/intent/tweet?text=' + encodeURIComponent(fullShareText);
