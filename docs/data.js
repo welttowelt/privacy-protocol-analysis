@@ -3,9 +3,10 @@
 const SUPERSCRIPTS = {1:"\u00B9",2:"\u00B2",3:"\u00B3",4:"\u2074",5:"\u2075",6:"\u2076",7:"\u2077",8:"\u2078",9:"\u2079",10:"\u00B9\u2070",11:"\u00B9\u00B9",12:"\u00B9\u00B2",13:"\u00B9\u00B3",14:"\u00B9\u2074",15:"\u00B9\u2075",16:"\u00B9\u2076",17:"\u00B9\u2077",18:"\u00B9\u2078",19:"\u00B9\u2079",20:"\u00B2\u2070",21:"\u00B2\u00B9",22:"\u00B2\u00B2",23:"\u00B2\u00B3",24:"\u00B2\u2074"};
 
 // scalable: short subtext shown under the col-10 tick ("Scalable private transactions").
-// Unified as TPS (transactions per second) for consistent comparison across protocols.
-// Order-of-magnitude estimates where not directly sourced; see the definition below for
-// per-protocol reasoning. 0 TPS = feature disabled/defunct; ∞ TPS = horizontal scaling.
+// Unit is TPS for cross-protocol comparison. Shown only when the number is either
+// demonstrated or structurally inherent (current state). Theoretical maxes, targets,
+// and unsourced estimates are intentionally omitted — the tick alone carries the signal
+// in those cases. See the definition below for per-protocol reasoning.
 const fullProjects = [
   { name: "STRK20s (Starknet)", highlight: true,
     ticks: [true, false, true, true, true, true, true, true, true, "partial", true, true, true, true, false, true, false],
@@ -13,20 +14,17 @@ const fullProjects = [
     scalable: "~1k TPS" },
   { name: "Zcash",
     ticks: [false, true, false, false, true, "partial", false, false, false, "partial", false, false, false, true, false, false, "partial"],
-    fnMap: {5: 2, 16: 14, 9: 18},
-    scalable: "~10 TPS" },
+    fnMap: {5: 2, 16: 14, 9: 18} },
   { name: "Monero",
     ticks: [false, false, false, false, "partial", true, false, false, "partial", false, false, false, false, true, false, false, true],
-    fnMap: {4: 1, 8: 21},
-    scalable: "~10 TPS" },
+    fnMap: {4: 1, 8: 21} },
   { name: "Aztec",
     ticks: [true, true, false, "partial", true, false, false, true, "partial", "partial", "partial", true, "partial", false, false, true, false],
     fnMap: {12: 3, 3: 4, 10: 8, 9: 15, 8: 23},
     scalable: "~1 TPS" },
   { name: "Aleo",
     ticks: [false, true, false, false, true, false, false, false, false, "partial", "partial", true, false, "partial", false, false, false],
-    fnMap: {13: 12, 10: 13, 9: 16},
-    scalable: "~10 TPS" },
+    fnMap: {13: 12, 10: 13, 9: 16} },
   { name: "Railgun",
     ticks: [true, true, false, false, true, false, false, false, false, false, false, false, true, true, true, false, false],
     fnMap: {},
@@ -49,8 +47,7 @@ const fullProjects = [
     scalable: "<1 TPS" },
   { name: "Tempo",
     ticks: [false, false, false, false, true, false, false, false, "partial", "partial", "partial", false, false, "partial", true, true, false],
-    fnMap: {8: 19, 9: 19, 10: 20, 13: 22},
-    scalable: "100k+ TPS" },
+    fnMap: {8: 19, 9: 19, 10: 20, 13: 22} },
 ];
 
 const fullFootnotes = {
@@ -157,7 +154,7 @@ const definitions = [
   { category: "Performance & UX", entries: [
     { term: "Fast shield/unshield", def: "How quickly a user can move between public and private states. STRK20s: ~2s block + sub-5s proof. Zcash: ~75s block bottleneck. Monero: always private, no opt-out. Aztec: ~6s blocks in Alpha Mainnet (since March 31, 2026). Railgun: 1-hour mandatory standby (PPOI). Solana: feature disabled. Zama: FHE much slower." },
     { term: "End-to-end transaction time", def: "Benchmark is Zcash Zashi (~5s on mobile, proof on device). STRK20s: ~5s but proof on wallet operator backend. Mobile proving on roadmap. Aztec: PXE proving still optimizing. Aleo: resource-intensive, outsourceable. Zama: FHE much slower." },
-    { term: "Scalable private transactions", def: "High throughput and low cost for private operations. The subtext under each tick shows an approximate TPS figure so all protocols are directly comparable. Starknet: ~1,000 TPS today, targeting 10k+, $0.002 avg fee. Zcash: ~10 TPS theoretical max for Orchard shielded txs (2MB blocks / ~2.3KB per tx / 75s block time); sustained throughput far lower. Monero: ~10 TPS peak; 120s blocks with adaptive size; historical average <1 TPS. Aztec: ~1 TPS in Alpha Mainnet (sourced, footnote 8). Aleo: ~10 TPS estimate; AleoBFT mainnet has no published private-tx benchmark. Railgun: <1 TPS realistic; each shield/unshield is ~700k–1M gas on Ethereum. Solana confidential transfer: 0 TPS; feature disabled on mainnet. Canton: ∞ TPS; horizontal scaling via network-of-networks with no global bottleneck, but access-control privacy model. Tornado Cash: 0 TPS; protocol defunct. Zama: <1 TPS; FHE operations are 100–10,000× slower than plaintext. Tempo: 100k+ TPS base layer target on Reth (sourced, footnote 20); private throughput not separately disclosed." },
+    { term: "Scalable private transactions", def: "High throughput and low cost for private operations. A TPS figure appears under the tick only when it's demonstrated or structurally inherent. Theoretical maxes, targets, and unsourced estimates are intentionally omitted so the number you see can be trusted. Shown figures: Starknet ~1k TPS (demonstrated on mainnet); Aztec ~1 TPS (Alpha Mainnet, footnote 8); Railgun <1 TPS (years of live Ethereum usage, constrained by ~700k–1M gas per Railgun tx); Solana confidential 0 TPS (feature disabled on mainnet); Canton ∞ TPS (horizontal scaling via network-of-networks, no global bottleneck by architecture); Tornado Cash 0 TPS (protocol defunct); Zama <1 TPS (FHE benchmarks show operations 100–10,000× slower than plaintext). Intentionally omitted: Zcash and Monero (theoretical-max math only, historical average far below ceiling), Aleo (no published private-tx benchmark), Tempo (100k+ TPS is a target on Reth, not demonstrated)." },
     { term: "Programmable privacy", def: "Ability to prove complex logic privately, verified cheaply onchain. STRK20s: Cairo + Stwo enables proving entire block logic. Aztec: Noir + PXE. Aleo: Leo but no cross-program composability. Zcash: simple transfers only. Tornado Cash: fixed-denomination deposits were the ceiling." },
   ]},
   { category: "Ecosystem & Access", entries: [
