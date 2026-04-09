@@ -1,6 +1,10 @@
 // === Render grids ===
 
-function renderTick(tick, fnMap, colIdx) {
+// Column 10 of the full grid ("Scalable private transactions") renders a
+// per-protocol metric subtext under the tick. All other cells are plain ticks.
+const SCALABLE_COL_IDX = 10;
+
+function renderTickInner(tick, fnMap, colIdx) {
   if (tick === true) {
     return '<span class="tick-full">\u2713</span>';
   } else if (tick === "partial") {
@@ -11,20 +15,31 @@ function renderTick(tick, fnMap, colIdx) {
   return '<span class="tick-dash">\u2013</span>';
 }
 
-function renderGrid(projects, bodyId) {
+function renderTick(tick, fnMap, colIdx, metric) {
+  const inner = renderTickInner(tick, fnMap, colIdx);
+  if (metric) {
+    return `<div class="tick-with-metric">${inner}<div class="tick-metric">${metric}</div></div>`;
+  }
+  return inner;
+}
+
+function renderGrid(projects, bodyId, isFull) {
   const tbody = document.getElementById(bodyId);
   tbody.innerHTML = projects.map((p, rowIdx) => {
     const cls = p.highlight ? ' class="highlight"' : '';
-    const cells = p.ticks.map((t, i) =>
-      `<td>${renderTick(t, p.fnMap, i)}</td>`
-    ).join('');
+    const cells = p.ticks.map((t, i) => {
+      const metric = (isFull && i === SCALABLE_COL_IDX && p.scalable) ? p.scalable : null;
+      return `<td>${renderTick(t, p.fnMap, i, metric)}</td>`;
+    }).join('');
     return `<tr${cls}><td class="sticky-col protocol-name">${p.name}</td>${cells}</tr>`;
   }).join('');
 }
 
 // Always render from the data file so the tables stay in sync.
-renderGrid(fullProjects, 'full-grid-body');
-renderGrid(glanceProjects, 'glance-grid-body');
+// Pass isFull=true for the property grid so the scalability metric subtext
+// appears on the Scalable column; glance grid gets plain ticks.
+renderGrid(fullProjects, 'full-grid-body', true);
+renderGrid(glanceProjects, 'glance-grid-body', false);
 
 // === Tabs ===
 document.querySelectorAll('.tab').forEach(tab => {
