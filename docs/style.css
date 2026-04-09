@@ -371,7 +371,7 @@ a:hover { text-decoration: underline; }
 }
 
 .tick-partial sup {
-  font-size: 1.3rem !important;
+  font-size: 0.85rem !important;
   font-weight: 500;
   margin-left: 2px;
   vertical-align: super;
@@ -388,12 +388,12 @@ a:hover { text-decoration: underline; }
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
   line-height: 1;
 }
 .tick-metric {
   font-family: 'JetBrains Mono', 'Courier New', monospace;
-  font-size: 0.62rem;
+  font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: -0.01em;
   color: var(--text-muted);
