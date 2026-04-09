@@ -1,6 +1,6 @@
-// Website data source — 17 properties x 11 protocols
+// Website data source — 17 properties x 12 protocols
 
-const SUPERSCRIPTS = {1:"\u00B9",2:"\u00B2",3:"\u00B3",4:"\u2074",5:"\u2075",6:"\u2076",7:"\u2077",8:"\u2078",9:"\u2079",10:"\u00B9\u2070",11:"\u00B9\u00B9",12:"\u00B9\u00B2",13:"\u00B9\u00B3",14:"\u00B9\u2074",15:"\u00B9\u2075",16:"\u00B9\u2076",17:"\u00B9\u2077",18:"\u00B9\u2078",19:"\u00B9\u2079",20:"\u00B2\u2070",21:"\u00B2\u00B9",22:"\u00B2\u00B2",23:"\u00B2\u00B3",24:"\u00B2\u2074"};
+const SUPERSCRIPTS = {1:"\u00B9",2:"\u00B2",3:"\u00B3",4:"\u2074",5:"\u2075",6:"\u2076",7:"\u2077",8:"\u2078",9:"\u2079",10:"\u00B9\u2070",11:"\u00B9\u00B9",12:"\u00B9\u00B2",13:"\u00B9\u00B3",14:"\u00B9\u2074",15:"\u00B9\u2075",16:"\u00B9\u2076",17:"\u00B9\u2077",18:"\u00B9\u2078",19:"\u00B9\u2079",20:"\u00B2\u2070",21:"\u00B2\u00B9",22:"\u00B2\u00B2",23:"\u00B2\u00B3",24:"\u00B2\u2074",25:"\u00B2\u2075",26:"\u00B2\u2076",27:"\u00B2\u2077",28:"\u00B2\u2078",29:"\u00B2\u2079",30:"\u00B3\u2070"};
 
 // scalable: short subtext shown under the col-10 tick ("Scalable private transactions").
 // Unit is TPS for cross-protocol comparison. Shown only when the number is either
@@ -48,6 +48,9 @@ const fullProjects = [
   { name: "Tempo",
     ticks: [false, false, false, false, true, false, false, false, "partial", "partial", "partial", false, false, "partial", true, true, false],
     fnMap: {8: 19, 9: 19, 10: 20, 13: 22} },
+  { name: "Midnight",
+    ticks: ["partial", true, false, "partial", true, false, false, false, "partial", "partial", "partial", true, false, "partial", false, false, false],
+    fnMap: {0: 25, 3: 26, 8: 27, 9: 27, 10: 28, 13: 29} },
 ];
 
 const fullFootnotes = {
@@ -75,9 +78,14 @@ const fullFootnotes = {
   22: "major design partners (Stripe, Visa, Mastercard, Deutsche Bank, Anthropic, OpenAI) but mainnet just launched March 18, 2026 \u2014 live ecosystem still nascent",
   23: "~6s block times in Alpha Mainnet since March 31, 2026. shielding speed will improve as block times target 3\u20134s by late 2026",
   24: "~5s end-to-end from user perspective, but proof runs on wallet operator backend (48-core machine). Zcash Zashi generates proofs directly on mobile in ~5s. for an apples-to-apples comparison, proof generation is not yet on consumer hardware. mobile proving on the roadmap",
+  25: "supports shielded and unshielded assets plus multiple shielded token types, but the docs do not clearly establish one shared multi-asset anonymity pool across all assets",
+  26: "private local state plus the Midnight Indexer improve wallet and DApp data access, but the docs do not yet specify note-discovery complexity or guarantees",
+  27: "client-side proving is built into the wallet/proof stack and recent Midnight releases use ~6 second block production, but Midnight has not published an official private transfer latency benchmark for current mainnet",
+  28: "Midnight emphasizes programmable privacy, predictable resource costs, and scale, but no official private-transaction TPS or cost benchmark is published yet",
+  29: "genesis block created March 17, 2026; network declared live March 29, 2026. wallet, explorer, indexer, and partner integrations exist, but the live app ecosystem is still early",
 };
 
-// At-a-glance data — 6 properties x 11 protocols
+// At-a-glance data — 6 properties x 12 protocols
 const glanceProjects = [
   { name: "STRK20s (Starknet)", highlight: true,
     ticks: [true, true, true, true, true, "partial"],
@@ -112,6 +120,9 @@ const glanceProjects = [
   { name: "Tempo",
     ticks: ["partial", false, "partial", true, false, "partial"],
     fnMap: {0: 18, 2: 19, 5: 20} },
+  { name: "Midnight",
+    ticks: ["partial", "partial", "partial", true, false, "partial"],
+    fnMap: {0: 21, 1: 22, 2: 23, 5: 24} },
 ];
 
 const glanceFootnotes = {
@@ -135,33 +146,37 @@ const glanceFootnotes = {
   18: "opt-in privacy, not private by default. privacy cryptography not publicly documented. uses TIP-403 Policy Registry for issuer compliance and auditability",
   19: "sub-second finality on base layer via Simplex BFT consensus, but private transaction speed not separately benchmarked",
   20: "native account abstraction with passkeys (P256) and MetaMask at launch, but no hardware wallet path published for confidential transfers",
+  21: "hybrid public/private state and ZK proofs make Midnight privacy-first, but privacy is configurable rather than always-on and the docs do not describe one canonical multi-asset anonymity pool",
+  22: "Compact enables private, composable apps on Midnight itself, but it is not zero-integration composability with existing EVM or Starknet DeFi",
+  23: "client-side proving and ~6-second block production point to decent UX, but no official end-to-end latency benchmark is published for current mainnet",
+  24: "Lace integration is live in the developer stack and multiple self-custody wallet partners are announced, but privacy-transaction hardware-wallet flows are not yet clearly documented",
 };
 
 // Column definitions grouped by category
 const definitions = [
   { category: "Privacy Model", entries: [
-    { term: "Multi-asset privacy pool", def: "Single pool supports multiple token types. Observers can\u2019t tell which token a note belongs to. STRK20s, Aztec, and Railgun have full multi-asset pools. Zama supports confidential ERC-20s via fhEVM but ecosystem is nascent. Aleo is asset-agnostic but each program has isolated state. Zcash/Monero are single-asset. Tornado Cash had fragmented pools. Canton uses access-control privacy." },
+    { term: "Multi-asset privacy pool", def: "Single pool supports multiple token types. Observers can\u2019t tell which token a note belongs to. STRK20s, Aztec, and Railgun have full multi-asset pools. Midnight supports multiple shielded token types, but the docs do not yet establish one shared anonymity pool. Zama supports confidential ERC-20s via fhEVM but ecosystem is nascent. Aleo is asset-agnostic but each program has isolated state. Zcash/Monero are single-asset. Tornado Cash had fragmented pools. Canton uses access-control privacy." },
     { term: "Formally ZK proofs", def: "The proof system has the mathematical zero-knowledge property: the proof guarantees that no information about the secret data leaks to the verifier. Zcash (Groth16/Halo 2), Aztec (PLONK/Honk), Aleo (Varuna), Railgun (Groth16), and Tornado Cash (Groth16) use formally ZK proof systems. STRK20s uses STARKs (not yet formally ZK). Monero uses ring signatures. Solana uses ElGamal. Canton uses access control." },
     { term: "Secretless (no per-note keys)", def: "Users handle a single signing key (or none, via AA). No per-note secrets to manage or lose. STRK20s derives all keys from the Starknet account key via account abstraction. Aztec requires 4 separate key pairs. Aleo requires private key + view key. Railgun requires spending + viewing keys. Monero requires spend + view keys." },
-    { term: "Efficient note discovery", def: "Recipients discover funds in time proportional to their own activity. STRK20s uses onchain indexed storage with shared secrets. Aztec uses a tagging mechanism but requires pre-registering senders. Zcash requires scanning all blocks. Railgun and Aleo use standard record/UTXO scanning." },
-    { term: "Selective disclosure", def: "Users can optionally reveal transaction history to a chosen third party without affecting other users\u2019 privacy. STRK20s has third-party viewing keys. Zcash has full viewing keys. Aztec has viewing key pairs. Aleo has view keys plus zPass. Railgun has scoped viewing keys plus PPOI. Canton has sub-transaction privacy with full auditability." },
+    { term: "Efficient note discovery", def: "Recipients discover funds in time proportional to their own activity. STRK20s uses onchain indexed storage with shared secrets. Aztec uses a tagging mechanism but requires pre-registering senders. Midnight separates public onchain state from private local state and ships an indexer, but note-discovery guarantees are not yet documented precisely. Zcash requires scanning all blocks. Railgun and Aleo use standard record/UTXO scanning." },
+    { term: "Selective disclosure", def: "Users can optionally reveal transaction history to a chosen third party without affecting other users\u2019 privacy. STRK20s has third-party viewing keys. Zcash has full viewing keys. Aztec has viewing key pairs. Aleo has view keys plus zPass. Railgun has scoped viewing keys plus PPOI. Midnight exposes selective disclosure through witness functions. Canton has sub-transaction privacy with full auditability." },
   ]},
   { category: "Cryptographic Foundation", entries: [
-    { term: "No trusted setup", def: "Proof system requires no trusted setup ceremony. STARKs (Starknet) require none. Zcash Orchard uses Halo 2 (no setup) but Sapling still has one. Monero\u2019s Bulletproofs+ and Solana\u2019s ElGamal/Bulletproofs require none. Aleo uses Varuna (requires universal SRS). Aztec\u2019s PLONK uses a universal updatable SRS. Railgun and Tornado Cash use Groth16 (per-circuit ceremonies)." },
+    { term: "No trusted setup", def: "Proof system requires no trusted setup ceremony. STARKs (Starknet) require none. Zcash Orchard uses Halo 2 (no setup) but Sapling still has one. Monero\u2019s Bulletproofs+ and Solana\u2019s ElGamal/Bulletproofs require none. Aleo uses Varuna (requires universal SRS). Aztec\u2019s PLONK uses a universal updatable SRS. Midnight\u2019s current stack references a Midnight SRS. Railgun and Tornado Cash use Groth16 (per-circuit ceremonies)." },
     { term: "Post-quantum proof system", def: "Underlying cryptography resists quantum computing attacks. STARKs (hash-based) are post-quantum by design. Zama\u2019s TFHE is lattice-based (LWE), considered PQ-resistant but less battle-tested. All SNARK/elliptic curve systems are vulnerable to quantum attacks." },
-    { term: "Succinct verifiability", def: "Anyone can verify chain integrity quickly and trustlessly on a small device. ZK rollups (Starknet, Aztec) have this. L1s like Solana, Zcash, Monero, Aleo, and Canton do not. Railgun runs on L1s without succinct verification." },
+    { term: "Succinct verifiability", def: "Anyone can verify chain integrity quickly and trustlessly on a small device. ZK rollups (Starknet, Aztec) have this. L1s like Solana, Zcash, Monero, Aleo, Midnight, and Canton do not. Railgun runs on L1s without succinct verification." },
   ]},
   { category: "Performance & UX", entries: [
-    { term: "Fast shield/unshield", def: "How quickly a user can move between public and private states. STRK20s: ~2s block + sub-5s proof. Zcash: ~75s block bottleneck. Monero: always private, no opt-out. Aztec: ~6s blocks in Alpha Mainnet (since March 31, 2026). Railgun: 1-hour mandatory standby (PPOI). Solana: feature disabled. Zama: FHE much slower." },
-    { term: "End-to-end transaction time", def: "Benchmark is Zcash Zashi (~5s on mobile, proof on device). STRK20s: ~5s but proof on wallet operator backend. Mobile proving on roadmap. Aztec: PXE proving still optimizing. Aleo: resource-intensive, outsourceable. Zama: FHE much slower." },
-    { term: "Scalable private transactions", def: "High throughput and low cost for private operations. A TPS figure appears under the tick only when it's demonstrated or structurally inherent. Theoretical maxes, targets, and unsourced estimates are intentionally omitted so the number you see can be trusted. Shown figures: Starknet ~1k TPS (demonstrated on mainnet); Aztec ~1 TPS (Alpha Mainnet, footnote 8); Railgun <1 TPS (years of live Ethereum usage, constrained by ~700k–1M gas per Railgun tx); Solana confidential 0 TPS (feature disabled on mainnet); Canton ∞ TPS (horizontal scaling via network-of-networks, no global bottleneck by architecture); Tornado Cash 0 TPS (protocol defunct); Zama <1 TPS (FHE benchmarks show operations 100–10,000× slower than plaintext). Intentionally omitted: Zcash and Monero (theoretical-max math only, historical average far below ceiling), Aleo (no published private-tx benchmark), Tempo (100k+ TPS is a target on Reth, not demonstrated)." },
-    { term: "Programmable privacy", def: "Ability to prove complex logic privately, verified cheaply onchain. STRK20s: Cairo + Stwo enables proving entire block logic. Aztec: Noir + PXE. Aleo: Leo but no cross-program composability. Zcash: simple transfers only. Tornado Cash: fixed-denomination deposits were the ceiling." },
+    { term: "Fast shield/unshield", def: "How quickly a user can move between public and private states. STRK20s: ~2s block + sub-5s proof. Zcash: ~75s block bottleneck. Monero: always private, no opt-out. Aztec: ~6s blocks in Alpha Mainnet (since March 31, 2026). Midnight uses client-side proving on a roughly 6-second block cadence, but no official mainnet shield/unshield benchmark is published. Railgun: 1-hour mandatory standby (PPOI). Solana: feature disabled. Zama: FHE much slower." },
+    { term: "End-to-end transaction time", def: "Benchmark is Zcash Zashi (~5s on mobile, proof on device). STRK20s: ~5s but proof on wallet operator backend. Mobile proving on roadmap. Aztec: PXE proving still optimizing. Midnight keeps private data local and supports client-side proving, but no official end-to-end latency benchmark is published. Aleo: resource-intensive, outsourceable. Zama: FHE much slower." },
+    { term: "Scalable private transactions", def: "High throughput and low cost for private operations. A TPS figure appears under the tick only when it's demonstrated or structurally inherent. Theoretical maxes, targets, and unsourced estimates are intentionally omitted so the number you see can be trusted. Shown figures: Starknet ~1k TPS (demonstrated on mainnet); Aztec ~1 TPS (Alpha Mainnet, footnote 8); Railgun <1 TPS (years of live Ethereum usage, constrained by ~700k–1M gas per Railgun tx); Solana confidential 0 TPS (feature disabled on mainnet); Canton ∞ TPS (horizontal scaling via network-of-networks, no global bottleneck by architecture); Tornado Cash 0 TPS (protocol defunct); Zama <1 TPS (FHE benchmarks show operations 100–10,000× slower than plaintext). Intentionally omitted: Zcash and Monero (theoretical-max math only, historical average far below ceiling), Aleo (no published private-tx benchmark), Midnight (no published private-tx benchmark yet), Tempo (100k+ TPS is a target on Reth, not demonstrated)." },
+    { term: "Programmable privacy", def: "Ability to prove complex logic privately, verified cheaply onchain. STRK20s: Cairo + Stwo enables proving entire block logic. Aztec: Noir + PXE. Midnight: Compact plus hybrid public/private state. Aleo: Leo but no cross-program composability. Zcash: simple transfers only. Tornado Cash: fixed-denomination deposits were the ceiling." },
   ]},
   { category: "Ecosystem & Access", entries: [
     { term: "DeFi composability", def: "Existing DeFi contracts require zero custom integration for private transactions. STRK20s and Railgun work with existing live protocols. Aztec and Canton have DeFi within their own ecosystems. Aleo has no composability between private applications." },
-    { term: "Existing ecosystem", def: "Live DeFi protocols, real liquidity, real users already present. Starknet, Zcash, Monero, Railgun, Solana, and Canton all have established ecosystems. Aleo mainnet since Sep 2024, DeFi nascent. Aztec in Alpha. Zama nascent." },
+    { term: "Existing ecosystem", def: "Live DeFi protocols, real liquidity, real users already present. Starknet, Zcash, Monero, Railgun, Solana, and Canton all have established ecosystems. Aleo mainnet since Sep 2024, DeFi nascent. Midnight mainnet launched in March 2026, ecosystem early. Aztec in Alpha. Zama nascent." },
     { term: "EVM compatible", def: "Privacy protocol runs on or integrates natively with EVM chains. Railgun on Ethereum/Polygon/Arbitrum/BSC. Tornado Cash was Ethereum-native. Zama\u2019s fhEVM is EVM-compatible. STRK20s runs on Cairo VM. Aztec uses Noir. Aleo uses Leo." },
     { term: "Account abstraction", def: "Privacy works with multisig, session keys, social recovery at the protocol level. STRK20s and Aztec have native protocol-level AA. Others require standard key management." },
-    { term: "Hardware wallet support", def: "Users can sign privacy transactions with a hardware wallet. Monero: Ledger full shielded. Zcash: Trezor Orchard, Ledger transparent only. Starknet: Ledger for standard txs, STRK20s privacy txs not yet available on HW wallets." },
+    { term: "Hardware wallet support", def: "Users can sign privacy transactions with a hardware wallet. Monero: Ledger full shielded. Zcash: Trezor Orchard, Ledger transparent only. Starknet: Ledger for standard txs, STRK20s privacy txs not yet available on HW wallets. Midnight has announced Keystone and other wallet partners, but privacy-transaction hardware flows are not yet clearly documented." },
   ]},
 ];
