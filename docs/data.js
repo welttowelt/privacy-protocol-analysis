@@ -1,4 +1,4 @@
-// Website data source — 17 properties x 12 protocols
+// Website data source — 17 properties x 13 protocols
 
 const SUPERSCRIPTS = {1:"\u00B9",2:"\u00B2",3:"\u00B3",4:"\u2074",5:"\u2075",6:"\u2076",7:"\u2077",8:"\u2078",9:"\u2079",10:"\u00B9\u2070",11:"\u00B9\u00B9",12:"\u00B9\u00B2",13:"\u00B9\u00B3",14:"\u00B9\u2074",15:"\u00B9\u2075",16:"\u00B9\u2076",17:"\u00B9\u2077",18:"\u00B9\u2078",19:"\u00B9\u2079",20:"\u00B2\u2070",21:"\u00B2\u00B9",22:"\u00B2\u00B2",23:"\u00B2\u00B3",24:"\u00B2\u2074",25:"\u00B2\u2075",26:"\u00B2\u2076",27:"\u00B2\u2077",28:"\u00B2\u2078",29:"\u00B2\u2079",30:"\u00B3\u2070"};
 
@@ -51,6 +51,9 @@ const fullProjects = [
   { name: "Midnight",
     ticks: ["partial", true, false, "partial", true, false, false, false, "partial", "partial", "partial", true, false, "partial", false, false, false],
     fnMap: {0: 25, 3: 26, 8: 27, 9: 27, 10: 28, 13: 29} },
+  { name: "USX Private Transfer",
+    ticks: [false, true, true, false, "partial", false, false, false, "partial", "partial", false, false, false, "partial", true, false, false],
+    fnMap: {4: 30, 8: 31, 9: 31, 13: 32} },
 ];
 
 const fullFootnotes = {
@@ -83,9 +86,12 @@ const fullFootnotes = {
   27: "client-side proving is built into the wallet/proof stack and recent Midnight releases use ~6 second block production, but Midnight has not published an official private transfer latency benchmark for current mainnet",
   28: "Midnight emphasizes programmable privacy, predictable resource costs, and scale, but no official private-transaction TPS or cost benchmark is published yet",
   29: "genesis block created March 17, 2026; network declared live March 29, 2026. wallet, explorer, indexer, and partner integrations exist, but the live app ecosystem is still early",
+  30: "USX docs say private transfer is 'private to the public, not to regulators' and explicitly support centralized auditing and view keys. this is compliance-oriented selective disclosure, not user-controlled viewing keys in the Zcash sense",
+  31: "users sign once and delivery is documented as 'under 10 minutes', but the flow still depends on LiFi swap routing, Across bridging, minting into USX, and Cloak delivery rather than an instant shield/unshield path",
+  32: "USX is live on Scroll and integrated into real Scroll DeFi, but the privacy product is still early. DefiLlama currently lists about $2.24M TVL for USX.Capital, which is enough for a real footprint but not yet a large ecosystem",
 };
 
-// At-a-glance data — 6 properties x 12 protocols
+// At-a-glance data — 6 properties x 13 protocols
 const glanceProjects = [
   { name: "STRK20s (Starknet)", highlight: true,
     ticks: [true, true, true, true, true, "partial"],
@@ -123,6 +129,9 @@ const glanceProjects = [
   { name: "Midnight",
     ticks: ["partial", "partial", "partial", true, false, "partial"],
     fnMap: {0: 21, 1: 22, 2: 23, 5: 24} },
+  { name: "USX Private Transfer",
+    ticks: ["partial", false, "partial", "partial", false, "partial"],
+    fnMap: {0: 25, 2: 26, 3: 27, 5: 28} },
 ];
 
 const glanceFootnotes = {
@@ -150,6 +159,10 @@ const glanceFootnotes = {
   22: "Compact enables private, composable apps on Midnight itself, but it is not zero-integration composability with existing EVM or Starknet DeFi",
   23: "client-side proving and ~6-second block production point to decent UX, but no official end-to-end latency benchmark is published for current mainnet",
   24: "Lace integration is live in the developer stack and multiple self-custody wallet partners are announced, but privacy-transaction hardware-wallet flows are not yet clearly documented",
+  25: "USX private transfer hides the sender-recipient link on public explorers, but the recipient receives public USX on Scroll and Cloak itself describes the model as pragmatic confidentiality rather than absolute privacy",
+  26: "the UX is intentionally simple and one-sign, but the documented delivery target is still 'under 10 minutes' rather than a few seconds",
+  27: "USX explicitly says private transfer is private to the public, not to regulators, and supports centralized auditing and view keys for AML/CFT compliance",
+  28: "USX works with standard EVM wallets like MetaMask and hides most routing complexity, but no privacy-transaction hardware-wallet path is documented",
 };
 
 // Column definitions grouped by category

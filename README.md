@@ -8,7 +8,7 @@ This grid exists so that builders, researchers, and users can see where things s
 
 ## What's in the grid
 
-**12 protocols** across **17 properties** in 4 categories:
+**13 protocols** across **17 properties** in 4 categories:
 
 | Category | Properties |
 |---|---|
@@ -19,7 +19,7 @@ This grid exists so that builders, researchers, and users can see where things s
 
 ### Protocols covered
 
-STRK20s (Starknet) · Zcash · Monero · Aztec · Aleo · Railgun · Solana Confidential · Canton · Tornado Cash · Zama (FHE) · Tempo · Midnight
+STRK20s (Starknet) · Zcash · Monero · Aztec · Aleo · Railgun · Solana Confidential · Canton · Tornado Cash · Zama (FHE) · Tempo · Midnight · USX Private Transfer
 
 **Missing a protocol?** Open a PR to add it.
 
