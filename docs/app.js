@@ -53,11 +53,27 @@ document.querySelectorAll('.tab').forEach(tab => {
 });
 
 // === Footnotes ===
+function getFootnoteText(note) {
+  return typeof note === 'string' ? note : note.text;
+}
+
+function renderFootnoteSources(note) {
+  if (typeof note === 'string' || !note.sources?.length) return '';
+  const links = note.sources.map(id => {
+    const source = sourceRefs[id];
+    if (!source) return '';
+    return `<a href="${source.url}" target="_blank" rel="noopener">${source.label}</a>`;
+  }).filter(Boolean).join(' <span aria-hidden="true">\u00b7</span> ');
+  if (!links) return '';
+  return `<div class="footnote-sources"><span>Sources:</span> ${links}</div>`;
+}
+
 function renderFootnotes(footnotes, containerId) {
   const container = document.getElementById(containerId);
   const sorted = Object.keys(footnotes).map(Number).sort((a, b) => a - b);
   container.innerHTML = sorted.map(n => {
-    return `<div class="footnote-item"><sup>${n}</sup>${footnotes[n]}</div>`;
+    const note = footnotes[n];
+    return `<div class="footnote-item"><div class="footnote-copy"><sup>${n}</sup><span>${getFootnoteText(note)}</span></div>${renderFootnoteSources(note)}</div>`;
   }).join('');
 }
 
@@ -89,9 +105,9 @@ document.addEventListener('mouseover', (e) => {
   const fnNum = parseInt(partial.dataset.fn);
   if (!fnNum) return;
   const footnotes = partial.closest('.glance-grid') ? glanceFootnotes : fullFootnotes;
-  const text = footnotes[fnNum];
-  if (!text) return;
-  tooltip.textContent = text;
+  const note = footnotes[fnNum];
+  if (!note) return;
+  tooltip.textContent = getFootnoteText(note);
   tooltip.classList.add('visible');
 });
 
@@ -114,7 +130,7 @@ const fullProtocolCount = fullProjects.length;
 const fullPropertyCount = fullProjects[0]?.ticks.length || 0;
 const glancePropertyCount = glanceProjects[0]?.ticks.length || 0;
 
-const fullShareText = `Privacy Protocol Grid — ${fullProtocolCount} protocols, ${fullPropertyCount} properties, all sourced.\n\nWho\u2019s building what in crypto privacy.\n\n${siteUrl}`;
+const fullShareText = `Privacy Protocol Grid — ${fullProtocolCount} protocols, ${fullPropertyCount} properties, sources listed in footnotes.\n\nWho\u2019s building what in crypto privacy.\n\n${siteUrl}`;
 const glanceShareText = `Privacy Protocols at a Glance — ${fullProtocolCount} protocols, ${glancePropertyCount} properties that matter most.\n\n${siteUrl}`;
 
 document.getElementById('share-full-twitter').href =

@@ -4,7 +4,7 @@
 
 An open overview of privacy protocols in crypto. Who is building what, and how each approach works.
 
-This grid exists so that builders, researchers, and users can see where things stand across the ecosystem — honestly, with sources — and figure out what still needs to be built.
+This grid exists so that builders, researchers, and users can see where things stand across the ecosystem — honestly, with sources listed in footnotes — and figure out what still needs to be built.
 
 ## What's in the grid
 
@@ -19,7 +19,7 @@ This grid exists so that builders, researchers, and users can see where things s
 
 ### Protocols covered
 
-STRK20s (Starknet) · Zcash · Monero · Aztec · Aleo · Railgun · Solana Confidential · Canton · Tornado Cash · Zama (FHE) · Tempo · Midnight · USX Private Transfer
+STRK20 (Starknet) · Zcash · Monero · Aztec · Aleo · Railgun · Solana Confidential · Canton · Tornado Cash · Zama (FHE) · Tempo · Midnight · USX Private Transfer
 
 **Missing a protocol?** Open a PR to add it.
 
@@ -28,10 +28,10 @@ STRK20s (Starknet) · Zcash · Monero · Aztec · Aleo · Railgun · Solana Conf
 Every cell is one of three values:
 
 - **✓** — has this capability
-- **(✓)** — partially, with a footnote explaining the caveat
+- **(✓)** — partially, with a footnote explaining the caveat and listing sources
 - **–** — not present
 
-All entries are backed by footnotes citing official documentation. If something is wrong, open an issue or PR with a source.
+Entries are backed by footnotes with listed sources. If something is wrong, open an issue or PR with a source.
 
 ## Website
 
@@ -39,7 +39,7 @@ All entries are backed by footnotes citing official documentation. If something 
 
 The interactive website lives in the `docs/` directory.
 
-`docs/data.js` is the source of truth for the grid data, footnotes, and definitions.
+`docs/data.js` is the source of truth for the grid data, footnotes, source links, and definitions.
 
 To run it locally:
 

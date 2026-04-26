@@ -346,7 +346,7 @@ a:hover { text-decoration: underline; }
 .protocol-grid tbody tr:nth-child(odd) .sticky-col { background: var(--dark-alt); }
 .protocol-grid tbody tr:nth-child(even) .sticky-col { background: var(--dark-secondary); }
 
-/* Highlighted row (STRK20s) */
+/* Highlighted row (STRK20) */
 .protocol-grid tbody tr.highlight td {
   background: var(--accent) !important;
   color: var(--dark);
@@ -526,15 +526,42 @@ summary:hover { color: var(--accent); }
 .footnote-item {
   font-size: 0.82rem;
   color: var(--text-body);
-  padding: 4px 0;
+  padding: 6px 0;
   line-height: 1.5;
+}
+
+.footnote-copy {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
 }
 
 .footnote-item sup {
   color: var(--accent-dim);
   font-size: 1.3rem;
   font-weight: 600;
-  margin-right: 6px;
+  flex: 0 0 auto;
+}
+
+.footnote-sources {
+  margin: 3px 0 0 27px;
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  line-height: 1.5;
+}
+
+.footnote-sources span {
+  color: var(--muted);
+}
+
+.footnote-sources a {
+  color: var(--accent-dim);
+  text-decoration: none;
+}
+
+.footnote-sources a:hover {
+  color: var(--accent);
+  text-decoration: underline;
 }
 
 /* Definitions */
@@ -803,17 +830,6 @@ summary:hover { color: var(--accent); }
   50% { opacity: 0.6; box-shadow: 0 0 2px rgba(0, 200, 83, 0.2); }
 }
 
-.status-amber {
-  background: #FFB300;
-  box-shadow: 0 0 6px rgba(255, 179, 0, 0.4);
-  animation: blink-amber 1s ease-in-out infinite;
-}
-
-@keyframes blink-amber {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
 .status-label {
   color: var(--text-muted);
   font-size: 0.62rem;
@@ -822,11 +838,6 @@ summary:hover { color: var(--accent); }
 
 .strk20-status-live .status-value {
   color: #00C853;
-}
-
-.strk20-status-upcoming .status-value {
-  color: #FFB300;
-  font-variant-numeric: tabular-nums;
 }
 
 .strk20-builder-resources {
