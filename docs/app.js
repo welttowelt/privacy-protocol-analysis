@@ -23,15 +23,24 @@ function renderTick(tick, fnMap, colIdx, metric) {
   return inner;
 }
 
+function renderProtocolName(project) {
+  const badge = project.status ? `<span class="protocol-status">${project.status}</span>` : '';
+  return `${project.name}${badge}`;
+}
+
 function renderGrid(projects, bodyId, isFull) {
   const tbody = document.getElementById(bodyId);
   tbody.innerHTML = projects.map((p, rowIdx) => {
-    const cls = p.highlight ? ' class="highlight"' : '';
+    const classes = [
+      p.highlight ? 'highlight' : '',
+      p.status ? `status-${p.status}` : '',
+    ].filter(Boolean).join(' ');
+    const cls = classes ? ` class="${classes}"` : '';
     const cells = p.ticks.map((t, i) => {
       const metric = (isFull && i === SCALABLE_COL_IDX && p.scalable) ? p.scalable : null;
       return `<td>${renderTick(t, p.fnMap, i, metric)}</td>`;
     }).join('');
-    return `<tr${cls}><td class="sticky-col protocol-name">${p.name}</td>${cells}</tr>`;
+    return `<tr${cls}><td class="sticky-col protocol-name">${renderProtocolName(p)}</td>${cells}</tr>`;
   }).join('');
 }
 
