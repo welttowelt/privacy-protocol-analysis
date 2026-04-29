@@ -32,9 +32,9 @@
 <!-- Open Graph -->
 <meta property="og:title" content="Privacy Protocol Grid">
 <meta property="og:description" content="What 14 crypto privacy protocols actually deliver: STRK20, Zcash, Monero, Aztec, Aleo, Railgun, Midnight, Tempo, USX, Privacy Boost. 17 properties, sources listed in footnotes.">
-<meta property="og:image" content="https://privacygrid.dev/privacy_grid_image.png?v=14">
+<meta property="og:image" content="https://privacygrid.dev/privacy_grid_image.png?v=15">
 <meta property="og:image:width" content="6000">
-<meta property="og:image:height" content="1441">
+<meta property="og:image:height" content="1437">
 <meta property="og:url" content="https://privacygrid.dev/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Privacy Protocol Grid">
@@ -43,14 +43,14 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Privacy Protocol Grid">
 <meta name="twitter:description" content="14 protocols. 17 properties. Sources in footnotes.">
-<meta name="twitter:image" content="https://privacygrid.dev/privacy_grid_image.png?v=14">
+<meta name="twitter:image" content="https://privacygrid.dev/privacy_grid_image.png?v=15">
 <meta name="twitter:image:alt" content="Privacy Protocol Grid comparing 14 protocols across 17 properties">
 
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
 
@@ -162,7 +162,7 @@
         <span class="legend-item"><span class="tick-dash">&ndash;</span> = not present</span>
       </div>
       <div class="share-bar">
-        <a href="privacy_grid_image.png?v=14" download="privacy_protocol_grid.png" class="share-btn download-btn">
+        <a href="privacy_grid_image.png?v=15" download="privacy_protocol_grid.png" class="share-btn download-btn">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9m0 0L5 7m3 3l3-3M2 12v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Download image
         </a>
@@ -206,7 +206,7 @@
         <span class="legend-item"><span class="tick-dash">&ndash;</span> = no</span>
       </div>
       <div class="share-bar">
-        <a href="privacy_at_a_glance_image.png?v=14" download="privacy_at_a_glance.png" class="share-btn download-btn">
+        <a href="privacy_at_a_glance_image.png?v=15" download="privacy_at_a_glance.png" class="share-btn download-btn">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9m0 0L5 7m3 3l3-3M2 12v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Download image
         </a>
@@ -364,7 +364,7 @@
 <footer>
   <div class="container">
     <p>Privacy Protocol Grid &ndash; <a href="https://github.com/welttowelt/privacy-protocol-analysis" target="_blank" rel="noopener">GitHub</a> &bull; MIT License</p>
-    <p class="footer-note">Starknet community operated. Everyone welcome to contribute. PRs reviewed on merit regardless of affiliation.</p>
+    <p class="footer-note">Currently maintained by StarkWare employees. Everyone welcome to contribute. PRs reviewed on merit regardless of affiliation.</p>
     <p class="footer-note">Sources are listed in footnotes. <a href="https://github.com/welttowelt/privacy-protocol-analysis/issues/new" target="_blank" rel="noopener">Report an error</a>.</p>
     <p class="footer-note footer-disclaimer">This grid documents technical privacy capabilities. Privacy is a design property, not an endorsement of any use case. Protocols listed here include compliance features like selective disclosure and viewing keys specifically because lawful privacy and regulatory compliance are not mutually exclusive.</p>
     <p class="footer-note"><a href="terms.html">Terms of Service</a> &bull; <a href="https://starknet.io/en/legal-disclaimers#toc-privacy-policy" target="_blank" rel="noopener">Privacy Policy</a></p>
@@ -374,7 +374,7 @@
 <!-- Tooltip -->
 <div class="tooltip" id="tooltip"></div>
 
-<script src="data.js?v=14"></script>
+<script src="data.js?v=15"></script>
 <script src="app.js?v=6"></script>
 <!-- Crawler-only prose + FAQ (visually hidden, readable by search engines and LLMs) -->
 <div class="sr-only">
@@ -384,13 +384,13 @@
   <h3>Privacy model</h3>
   <p>STRK20 on Starknet, Aztec, Railgun, and Privacy Boost all support multi-asset privacy pools, meaning multiple token types share a single anonymity set. Midnight supports multiple shielded token types, but its docs do not yet establish one canonical shared pool. Zcash and Monero are single-asset only. STRK20 is the only protocol with a secretless design where users manage a single signing key via account abstraction, with no per-note secrets to lose. Most other protocols require two or more key pairs. For selective disclosure, STRK20, Zcash, Aztec, Aleo, Railgun, and Midnight all offer user-controlled ways to reveal transaction history to a chosen third party; Tempo, USX, and Privacy Boost expose more issuer-, operator-, or regulator-oriented disclosure paths.</p>
   <h3>Cryptographic foundation</h3>
-  <p>STRK20 uses STARKs, which require no trusted setup and are post-quantum resistant by design (hash-based). Its formal zero-knowledge row is marked partial because STRK20 public copy describes zero-knowledge-backed private transactions, while public S-two docs still say the zero-knowledge feature was not available at time of writing. Zcash's Orchard upgrade uses Halo 2 (no setup), but its older Sapling pool still relies on a trusted ceremony. Aztec uses PLONK with a universal updatable SRS. Railgun, Privacy Boost, and Tornado Cash use Groth16, which requires per-circuit ceremonies. On post-quantum security, only STARKs (Starknet) and TFHE lattice-based cryptography (Zama) are considered resistant to quantum attacks.</p>
+  <p>STRK20 uses STARKs, which require no trusted setup and are post-quantum resistant by design (hash-based). Its formal zero-knowledge row is marked partial because STRK20 public copy describes zero-knowledge-backed private transactions, while public S-two docs still say the zero-knowledge feature was not available at time of writing. Zcash's Orchard upgrade uses Halo 2 (no setup), but its older Sapling pool still relies on a trusted ceremony. Aztec uses PLONK with a universal updatable SRS. Railgun, Privacy Boost, and Tornado Cash use Groth16, which requires per-circuit ceremonies. On post-quantum security, STARKs (Starknet) and TFHE lattice-based cryptography (Zama) are the two approaches in the grid treated as quantum-resistant, with Zama marked partial because its model is not succinct ZK verification.</p>
   <h3>Performance and UX</h3>
-  <p>STRK20 offers the fastest trust-minimized shielding: ~2s block confirmation plus sub-5s proof generation. Zcash is bottlenecked by ~75s block times. Privacy Boost advertises sub-500ms TEE proof generation and high throughput through epoch batching, but transfers settle when relays submit epochs and the privacy path depends on an enclave operator. Aztec runs ~6s blocks in Alpha Mainnet (launched March 31, 2026), but the team has also published alpha-stage security warnings and told users not to put in funds they are not willing to lose. Midnight uses client-side proving on a roughly 6-second block cadence, but has not yet published a public mainnet latency benchmark. Railgun imposes a mandatory 1-hour standby after shielding. Monero is always private by default but has no opt-out to a transparent state. For scalability, Starknet handles roughly 1,000 TPS today, while Aztec processes about 1 TPS in its Alpha phase.</p>
+  <p>STRK20 offers the fastest trust-minimized shielding: ~2s block confirmation plus sub-5s proof generation. Zcash is bottlenecked by ~75s block times. Privacy Boost advertises sub-500ms TEE proof generation and high throughput through epoch batching, but transfers settle when relays submit epochs and the privacy path depends on an enclave operator. Aztec runs ~6s blocks in Alpha Mainnet (launched March 31, 2026), but the team has also published alpha-stage security warnings and told users not to put in funds they are not willing to lose. Midnight uses client-side proving on a roughly 6-second block cadence, but has not yet published a public mainnet latency benchmark. Railgun imposes a mandatory 1-hour standby after shielding. Monero is always private by default but has no opt-out to a transparent state. For scalability, the grid no longer prints base-chain TPS as STRK20 private-transfer TPS; Aztec currently processes about 1 TPS in its Alpha phase.</p>
   <h3>Ecosystem and DeFi</h3>
   <p>STRK20 and Railgun are the only protocols where existing DeFi contracts require zero custom integration for private transactions. Railgun works across Ethereum, Polygon, Arbitrum, and BSC. Aztec, Canton, Midnight, Tempo, Aleo, and Privacy Boost have privacy-capable application environments, SDKs, or token standards within their own ecosystems but are not composable with existing Ethereum or Starknet DeFi without custom integration or unshielding. Starknet, Zcash, Monero, Solana, and Canton all have established ecosystems with real liquidity and users. Tempo and Midnight are newly live and still early. USX is live on Scroll with a modest footprint. Privacy Boost is live as an OP Mainnet beta and has announced Startale/Soneium integration, but public usage telemetry is not yet available. Zama mainnet is live with early applications and infrastructure integrations, but its ecosystem is still nascent.</p>
   <h3>What each protocol is best suited for</h3>
-  <p>STRK20 (Starknet) covers the widest range of properties: multi-asset privacy, no trusted setup, post-quantum proofs, fast shielding, DeFi composability, programmable privacy, and account abstraction. It is designed for supported regular ERC-20 tokens on Starknet. Zcash pioneered zero-knowledge proofs for payments and has the longest track record. Monero offers always-on privacy with strong anonymity but limited programmability. Aztec is building a full programmable privacy L2 with Noir and its own execution environment, but it remains alpha-stage with explicit security caveats. Midnight is a privacy-first programmable chain built around hybrid public/private state and selective disclosure, with a live but still early ecosystem. Railgun brings privacy to existing EVM DeFi through its shielded pool. Privacy Boost targets enterprise EVM apps with a Groth16 plus TEE privacy SDK; it has strong UX and compliance positioning but a larger privacy trust surface. Aleo enables private computation with Leo, but each program runs in isolation. Zama takes a different approach with fully homomorphic encryption, computing on encrypted data server-side, and is beginning to show early mainnet applications and integrations.</p>
+  <p>STRK20 (Starknet) covers the widest range of properties: multi-asset privacy, no trusted setup, post-quantum proofs, fast shielding, DeFi composability, programmable privacy, and account abstraction. It is designed for supported regular ERC-20 tokens on Starknet. Zcash pioneered zero-knowledge proofs for payments and has the longest track record. Monero offers always-on privacy with strong anonymity but limited programmability. Aztec is building a full programmable privacy L2 with Noir and its own execution environment, but it remains alpha-stage with explicit security caveats. Midnight is a privacy-first programmable chain built around hybrid public/private state and selective disclosure, with a live but still early ecosystem. Railgun brings privacy to existing EVM DeFi through its shielded pool. Privacy Boost targets enterprise EVM apps with a Groth16 plus TEE privacy SDK; it has strong UX and compliance positioning but a larger privacy trust surface. Aleo enables private computation with Leo, but each program runs in isolation. Zama takes a different approach with fully homomorphic encryption, computing on encrypted data through confidential Solidity contracts, and is beginning to show early mainnet applications and integrations.</p>
 </section>
 <section itemscope itemtype="https://schema.org/FAQPage">
   <h2>Frequently asked questions</h2>
@@ -400,11 +400,11 @@
   </div>
   <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
     <h3 itemprop="name">Which crypto privacy protocol has no trusted setup?</h3>
-    <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><p itemprop="text">STRK20 (Starknet), Monero, Solana Confidential, and Canton require no trusted setup. STRK20 uses STARKs, which are hash-based. Monero uses Bulletproofs+. Solana uses ElGamal/Bulletproofs. Zcash's Orchard upgrade uses Halo 2 (no setup) but its Sapling pool still has one. Aztec and Aleo use universal SRS setups. Railgun and Tornado Cash use Groth16 per-circuit ceremonies. Tempo is marked partial because its private-token cryptography is not yet publicly specified.</p></div>
+    <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><p itemprop="text">STRK20 (Starknet), Monero, Solana Confidential, and Canton require no trusted setup. STRK20 uses STARKs, which are hash-based. Monero uses Bulletproofs+. Solana uses ElGamal/Bulletproofs. Zcash's Orchard upgrade uses Halo 2 (no setup) but its Sapling pool still has one. Aztec and Aleo use universal SRS setups. Railgun, Privacy Boost, and Tornado Cash use Groth16 per-circuit ceremonies. Tempo is marked partial because its private-token cryptography is not yet publicly specified.</p></div>
   </div>
   <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
     <h3 itemprop="name">Which privacy protocols are post-quantum resistant?</h3>
-    <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><p itemprop="text">Only STRK20 (Starknet) and Zama (FHE) use cryptographic systems considered resistant to quantum computing attacks. STRK20 uses STARKs, which are hash-based and post-quantum by design. Zama uses TFHE, which relies on lattice-based (LWE) hardness assumptions. All SNARK and elliptic-curve-based protocols are vulnerable.</p></div>
+    <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><p itemprop="text">STRK20 (Starknet) is marked fully post-quantum because STARKs are hash-based and post-quantum by design. Zama receives partial credit: its TFHE stack relies on lattice-based LWE hardness assumptions, but it is not a succinct proof system. SNARK and elliptic-curve-based protocols are vulnerable to quantum attacks.</p></div>
   </div>
   <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
     <h3 itemprop="name">What privacy protocols work with ERC-20 tokens?</h3>

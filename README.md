@@ -52,6 +52,10 @@ python3 -m http.server 8080
 
 This grid is currently maintained by StarkWare employees. Contributions are open — anyone can submit issues and pull requests, and we review them on merit regardless of affiliation.
 
+## Acknowledgements
+
+Thanks to [lucadonnoh](https://github.com/lucadonnoh) for pointing out that calling Tornado Cash "defunct" was too strong; the grid now labels it as a legacy protocol instead.
+
 ## Contributing
 
 This grid is only as good as the community keeping it accurate. Contributions are welcome from anyone — protocol teams, researchers, users.

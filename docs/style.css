@@ -356,11 +356,11 @@ a:hover { text-decoration: underline; }
 .protocol-grid tbody tr.highlight .tick-partial { color: #6B4420; }
 .protocol-grid tbody tr.highlight .tick-dash { color: #8B5E3C; }
 
-/* Defunct protocol rows stay comparable but recede visually. */
-.protocol-grid tbody tr.status-defunct td {
+/* Legacy protocol rows stay comparable but recede visually. */
+.protocol-grid tbody tr.status-legacy td {
   opacity: 0.68;
 }
-.protocol-grid tbody tr.status-defunct .protocol-name {
+.protocol-grid tbody tr.status-legacy .protocol-name {
   font-style: italic;
 }
 .protocol-status {
