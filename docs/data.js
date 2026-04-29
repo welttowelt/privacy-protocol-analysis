@@ -1,4 +1,4 @@
-// Website data source — 17 properties x 13 protocols
+// Website data source — 17 properties x 14 protocols
 
 const SUPERSCRIPTS = {1:"\u00B9",2:"\u00B2",3:"\u00B3",4:"\u2074",5:"\u2075",6:"\u2076",7:"\u2077",8:"\u2078",9:"\u2079",10:"\u00B9\u2070",11:"\u00B9\u00B9",12:"\u00B9\u00B2",13:"\u00B9\u00B3",14:"\u00B9\u2074",15:"\u00B9\u2075",16:"\u00B9\u2076",17:"\u00B9\u2077",18:"\u00B9\u2078",19:"\u00B9\u2079",20:"\u00B2\u2070",21:"\u00B2\u00B9",22:"\u00B2\u00B2",23:"\u00B2\u00B3",24:"\u00B2\u2074",25:"\u00B2\u2075",26:"\u00B2\u2076",27:"\u00B2\u2077",28:"\u00B2\u2078",29:"\u00B2\u2079",30:"\u00B3\u2070"};
 
@@ -61,6 +61,15 @@ const sourceRefs = {
   "cloak-docs": { label: "Cloak docs", url: "https://scroll-tech.github.io/cloak-documentation/" },
   "cloak-private": { label: "Cloak private transfers", url: "https://cloak-4.gitbook.io/cloak-docs/cloak-tools/private-transfers" },
   "defillama-usx": { label: "DefiLlama USX", url: "https://defillama.com/protocol/usx.capital" },
+  "privacyboost-overview": { label: "Privacy Boost overview", url: "https://docs.privacyboost.io/product/overview" },
+  "privacyboost-trust": { label: "Privacy Boost trust model", url: "https://docs.privacyboost.io/product/trust-and-security" },
+  "privacyboost-compliance": { label: "Privacy Boost compliance docs", url: "https://docs.privacyboost.io/product/compliance" },
+  "privacyboost-protocol": { label: "Privacy Boost protocol docs", url: "https://docs.privacyboost.io/technical-explainer/protocol" },
+  "privacyboost-keys": { label: "Privacy Boost keys docs", url: "https://docs.privacyboost.io/technical-explainer/keys-and-encryption" },
+  "privacyboost-audit": { label: "OpenZeppelin PrivacyBoost audit", url: "https://www.openzeppelin.com/news/sunnyside-labs-privacyboost-audit" },
+  "privacyboost-terms": { label: "Privacy Boost terms", url: "https://www.privacyboost.io/terms" },
+  "privacyboost-optimism": { label: "Optimism Privacy Boost launch", url: "https://www.optimism.io/blog/privacy-comes-to-the-op-stack" },
+  "privacyboost-startale": { label: "Startale Privacy Boost integration", url: "https://cointelegraph.com/news/startale-app-taps-privacy-boost-for-private-transfers-on-soneium" },
 };
 
 const sourced = (text, sources = []) => ({ text, sources });
@@ -118,6 +127,9 @@ const fullProjects = [
   { name: "USX Private Transfer",
     ticks: [false, true, true, false, "partial", false, false, false, "partial", "partial", false, false, false, "partial", true, false, false],
     fnMap: {4: 30, 8: 31, 9: 31, 13: 32} },
+  { name: "Privacy Boost",
+    ticks: [true, true, false, "partial", "partial", false, false, false, "partial", "partial", "partial", false, false, false, true, false, false],
+    fnMap: {3: 37, 4: 38, 8: 39, 9: 39, 10: 40} },
 ];
 
 const fullFootnotes = {
@@ -157,9 +169,13 @@ const fullFootnotes = {
   34: sourced("STRK20 and Starknet public copy describe zero-knowledge-backed private transactions, but the public S-two docs say S-two did not provide the zero-knowledge feature at time of writing. marked partial until current deployment status is documented end to end", ["strk20-overview", "starknet-strk20-blog", "stwo-zk-status"]),
   35: sourced("Tempo docs describe selective disclosure for planned private-token designs, and TIP-403 provides issuer policy controls, but the native private token standard is still described as a future release", ["tempo-privacy", "tempo-tip403"]),
   36: sourced("Tempo's base chain does not imply a trusted setup, but the privacy cryptography for private tokens is not publicly specified yet. the grid does not assert either no-setup or trusted-setup status as a full claim", ["tempo-privacy", "tempo-transactions"]),
+  37: sourced("fast balance and history UX depends on a TEE indexer that decrypts transaction metadata and serves indexed state. users can manually recover by scanning onchain events with their viewing key, but normal note discovery is enclave-mediated", ["privacyboost-trust", "privacyboost-protocol", "privacyboost-audit"]),
+  38: sourced("audit access is operator-mediated rather than user-issued viewing keys: auditors query a TEE-decrypted database through authenticated API access, with onchain audit logs submitted asynchronously", ["privacyboost-compliance", "privacyboost-terms"]),
+  39: sourced("server-side TEE proving is advertised as sub-500ms, but private transfers settle when the relay submits an epoch. forced withdrawals bypass the TEE but introduce a configurable delay", ["privacyboost-overview", "privacyboost-protocol", "privacyboost-audit"]),
+  40: sourced("epoch batching gives one Groth16 proof per batch and docs estimate 300+ sustained TPS at Base gas target or 1,800+ TPS at gas limit, but no public production telemetry was found. no TPS sublabel is shown for claimed or theoretical figures", ["privacyboost-protocol", "privacyboost-trust"]),
 };
 
-// At-a-glance data — 6 properties x 13 protocols
+// At-a-glance data — 6 properties x 14 protocols
 const glanceProjects = [
   { name: "STRK20 (Starknet)", highlight: true,
     ticks: [true, true, true, true, true, "partial"],
@@ -200,6 +216,9 @@ const glanceProjects = [
   { name: "USX Private Transfer",
     ticks: ["partial", false, "partial", "partial", false, "partial"],
     fnMap: {0: 25, 2: 26, 3: 27, 5: 28} },
+  { name: "Privacy Boost",
+    ticks: ["partial", false, "partial", "partial", false, "partial"],
+    fnMap: {0: 30, 2: 31, 3: 32, 5: 33} },
 ];
 
 const glanceFootnotes = {
@@ -232,19 +251,23 @@ const glanceFootnotes = {
   27: sourced("USX explicitly says private transfer is private to the public, not to regulators, and supports centralized auditing and view keys for AML/CFT compliance", ["usx-docs", "cloak-private"]),
   28: sourced("USX works with standard EVM wallets like MetaMask and hides most routing complexity, but no privacy-transaction hardware-wallet path is documented", ["cloak-docs", "cloak-private"]),
   29: sourced("Aztec's speed-related full-grid properties are all partial: Alpha Mainnet has ~6s blocks, PXE proving is still being optimized, and current alpha throughput is about ~1 TPS", ["aztec-networks", "aztec-pxe"]),
+  30: sourced("private from public observers, but not private from the enclave trust path: the TEE sees plaintext amounts and counterparties, and Sunnyside or a service operator may control selective-disclosure access to transaction data", ["privacyboost-trust", "privacyboost-terms", "privacyboost-audit"]),
+  31: sourced("TEE proof generation is advertised as sub-500ms, but transfers are epoch-batched and no public production latency benchmark was found", ["privacyboost-overview", "privacyboost-protocol"]),
+  32: sourced("compliance disclosure is not user-issued viewing keys. auditors query account-level history and balances from the TEE-indexed database through an authenticated API, with onchain query logs", ["privacyboost-compliance", "privacyboost-terms"]),
+  33: sourced("works with MetaMask, WalletConnect, and EOAs, but the privacy account still derives separate auth, viewing, and nullifying keys and no hardware-wallet privacy flow is documented", ["privacyboost-overview", "privacyboost-keys"]),
 };
 
 // Column definitions grouped by category
 const definitions = [
   { category: "Privacy Model", entries: [
-    { term: "Multi-asset privacy pool", def: "Single pool supports multiple token types. Observers can\u2019t tell which token a note belongs to. STRK20, Aztec, and Railgun have full multi-asset pools. Midnight supports multiple shielded token types, but the docs do not yet establish one shared anonymity pool. Zama supports confidential ERC-20s via fhEVM but ecosystem is nascent. Aleo is asset-agnostic but each program has isolated state. Zcash/Monero are single-asset. Tornado Cash had fragmented pools. Canton uses access-control privacy." },
-    { term: "Formally ZK proofs", def: "The proof system has the mathematical zero-knowledge property: the proof guarantees that no information about the secret data leaks to the verifier. Zcash (Groth16/Halo 2), Aztec (PLONK/Honk), Aleo (Varuna), Railgun (Groth16), and Tornado Cash (Groth16) use formally ZK proof systems. STRK20 is marked partial: public STRK20 copy says zero-knowledge-backed private transactions, while public S-two docs say the zero-knowledge feature was not available at time of writing. Monero uses ring signatures. Solana uses ElGamal. Canton uses access control." },
-    { term: "Secretless (no per-note keys)", def: "Users handle a single signing key (or none, via AA). No per-note secrets to manage or lose. STRK20 derives all keys from the Starknet account key via account abstraction. Aztec requires 4 separate key pairs. Aleo requires private key + view key. Railgun requires spending + viewing keys. Monero requires spend + view keys." },
-    { term: "Efficient note discovery", def: "Recipients discover funds in time proportional to their own activity. STRK20 uses onchain indexed storage with shared secrets. Aztec uses a tagging mechanism but requires pre-registering senders. Midnight separates public onchain state from private local state and ships an indexer, but note-discovery guarantees are not yet documented precisely. Zcash requires scanning all blocks. Railgun and Aleo use standard record/UTXO scanning." },
-    { term: "Selective disclosure", def: "Users can optionally reveal transaction history to a chosen third party without affecting other users\u2019 privacy. STRK20 has third-party viewing keys. Zcash has full viewing keys. Aztec has viewing key pairs. Aleo has view keys plus zPass. Railgun has scoped viewing keys plus PPOI. Midnight exposes selective disclosure through witness functions. Tempo describes issuer/regulator selective disclosure for planned private tokens. USX exposes regulatory view keys. Canton has sub-transaction privacy with full auditability." },
+    { term: "Multi-asset privacy pool", def: "Single pool supports multiple token types. Observers can\u2019t tell which token a note belongs to. STRK20, Aztec, Railgun, and Privacy Boost have full multi-asset pools. Midnight supports multiple shielded token types, but the docs do not yet establish one shared anonymity pool. Zama supports confidential ERC-20s via fhEVM but ecosystem is nascent. Aleo is asset-agnostic but each program has isolated state. Zcash/Monero are single-asset. Tornado Cash had fragmented pools. Canton uses access-control privacy." },
+    { term: "Formally ZK proofs", def: "The proof system has the mathematical zero-knowledge property: the proof guarantees that no information about the secret data leaks to the verifier. Zcash (Groth16/Halo 2), Aztec (PLONK/Honk), Aleo (Varuna), Railgun (Groth16), Privacy Boost (Groth16/BN254), and Tornado Cash (Groth16) use formally ZK proof systems. STRK20 is marked partial: public STRK20 copy says zero-knowledge-backed private transactions, while public S-two docs say the zero-knowledge feature was not available at time of writing. Monero uses ring signatures. Solana uses ElGamal. Canton uses access control." },
+    { term: "Secretless (no per-note keys)", def: "Users handle a single signing key (or none, via AA). No per-note secrets to manage or lose. STRK20 derives all keys from the Starknet account key via account abstraction. Privacy Boost derives auth, viewing, and nullifying keys from a seed in addition to the user's EOA key. Aztec requires 4 separate key pairs. Aleo requires private key + view key. Railgun requires spending + viewing keys. Monero requires spend + view keys." },
+    { term: "Efficient note discovery", def: "Recipients discover funds in time proportional to their own activity. STRK20 uses onchain indexed storage with shared secrets. Privacy Boost provides fast note discovery through a TEE indexer that decrypts and serves metadata, with manual recovery by scanning onchain events. Aztec uses a tagging mechanism but requires pre-registering senders. Midnight separates public onchain state from private local state and ships an indexer, but note-discovery guarantees are not yet documented precisely. Zcash requires scanning all blocks. Railgun and Aleo use standard record/UTXO scanning." },
+    { term: "Selective disclosure", def: "Users can optionally reveal transaction history to a chosen third party without affecting other users\u2019 privacy. STRK20 has third-party viewing keys. Zcash has full viewing keys. Aztec has viewing key pairs. Aleo has view keys plus zPass. Railgun has scoped viewing keys plus PPOI. Midnight exposes selective disclosure through witness functions. Privacy Boost exposes compliance-oriented audit API access to a TEE-indexed database rather than user-issued viewing keys. Tempo describes issuer/regulator selective disclosure for planned private tokens. USX exposes regulatory view keys. Canton has sub-transaction privacy with full auditability." },
   ]},
   { category: "Cryptographic Foundation", entries: [
-    { term: "No trusted setup", def: "Proof system requires no trusted setup ceremony. STARKs (Starknet) require none. Zcash Orchard uses Halo 2 (no setup) but Sapling still has one. Monero\u2019s Bulletproofs+ and Solana\u2019s ElGamal/Bulletproofs require none. Aleo uses Varuna (requires universal SRS). Aztec\u2019s PLONK uses a universal updatable SRS. Midnight\u2019s current stack references a Midnight SRS. Railgun and Tornado Cash use Groth16 (per-circuit ceremonies). Tempo private-token cryptography is not yet publicly specified." },
+    { term: "No trusted setup", def: "Proof system requires no trusted setup ceremony. STARKs (Starknet) require none. Zcash Orchard uses Halo 2 (no setup) but Sapling still has one. Monero\u2019s Bulletproofs+ and Solana\u2019s ElGamal/Bulletproofs require none. Aleo uses Varuna (requires universal SRS). Aztec\u2019s PLONK uses a universal updatable SRS. Midnight\u2019s current stack references a Midnight SRS. Railgun, Privacy Boost, and Tornado Cash use Groth16 (per-circuit ceremonies). Tempo private-token cryptography is not yet publicly specified." },
     { term: "Post-quantum proof system", def: "Underlying cryptography resists quantum computing attacks. STARKs (hash-based) are post-quantum by design. Zama\u2019s TFHE is lattice-based (LWE), considered PQ-resistant but less battle-tested. All SNARK/elliptic curve systems are vulnerable to quantum attacks." },
     { term: "Succinct verifiability", def: "Anyone can verify chain integrity quickly and trustlessly on a small device. ZK rollups (Starknet, Aztec) have this. L1s like Solana, Zcash, Monero, Aleo, Midnight, and Canton do not. Railgun runs on L1s without succinct verification." },
   ]},
@@ -255,10 +278,10 @@ const definitions = [
     { term: "Programmable privacy", def: "Ability to prove complex logic privately, verified cheaply onchain. STRK20: Cairo + Stwo enables proving entire block logic. Aztec: Noir + PXE. Midnight: Compact plus hybrid public/private state. Aleo: Leo but no cross-program composability. Zcash: simple transfers only. Tornado Cash: fixed-denomination deposits were the ceiling." },
   ]},
   { category: "Ecosystem & Access", entries: [
-    { term: "DeFi composability", def: "Existing DeFi contracts require zero custom integration for private transactions. STRK20 and Railgun work with existing live protocols. Aztec, Canton, Midnight, Tempo, and Aleo require building inside their own app environments or token standards. USX routes through a specific private-transfer flow rather than arbitrary DeFi composability." },
-    { term: "Existing ecosystem", def: "Live DeFi protocols, real liquidity, real users already present. Starknet, Zcash, Monero, Railgun, Solana, and Canton all have established ecosystems. Aleo mainnet since Sep 2024, DeFi nascent. Tempo mainnet launched in March 2026 with named design partners, but the live ecosystem is early. Midnight mainnet launched in March 2026, ecosystem early. USX is live on Scroll with modest TVL. Aztec is live in Alpha with explicit security caveats. Zama mainnet is live with early applications and integrations, but the ecosystem is still small." },
-    { term: "EVM compatible", def: "Privacy protocol runs on or integrates natively with EVM chains. Railgun on Ethereum/Polygon/Arbitrum/BSC. Tornado Cash was Ethereum-native. Zama\u2019s fhEVM and Tempo are EVM-compatible. USX runs on Scroll. STRK20 runs on Cairo VM. Aztec uses Noir. Aleo uses Leo. Midnight uses Compact." },
-    { term: "Account abstraction", def: "Privacy works with multisig, session keys, social recovery, passkeys, or sponsored transactions at the protocol level. STRK20 and Aztec have native protocol-level AA. Tempo has native account-abstraction-style transaction features and passkeys. Others require standard key management or app-specific abstractions." },
-    { term: "Hardware wallet support", def: "Users can sign privacy transactions with a hardware wallet. Monero: Ledger full shielded. Zcash: hardware-wallet support is limited; official Trezor docs say shielded z-address transactions are not compatible. Solana has Ledger support, but confidential transfers are disabled on mainnet. Starknet has Ledger for standard transactions, but STRK20 privacy transactions are not yet available on hardware wallets. Tempo uses passkey AA but no hardware-wallet path for confidential transfers is published. Midnight has announced Keystone and other wallet partners, but privacy-transaction hardware flows are not yet clearly documented. Aztec, Aleo, and USX do not have documented privacy-transaction hardware-wallet support." },
+    { term: "DeFi composability", def: "Existing DeFi contracts require zero custom integration for private transactions. STRK20 and Railgun work with existing live protocols. Aztec, Canton, Midnight, Tempo, and Aleo require building inside their own app environments or token standards. Privacy Boost is an SDK/app integration layer around shielded deposits, transfers, and withdrawals; private DeFi is roadmap rather than zero-integration composability today. USX routes through a specific private-transfer flow rather than arbitrary DeFi composability." },
+    { term: "Existing ecosystem", def: "Live DeFi protocols, real liquidity, real users already present. Starknet, Zcash, Monero, Railgun, Solana, and Canton all have established ecosystems. Aleo mainnet since Sep 2024, DeFi nascent. Tempo mainnet launched in March 2026 with named design partners, but the live ecosystem is early. Midnight mainnet launched in March 2026, ecosystem early. USX is live on Scroll with modest TVL. Privacy Boost is live as an OP Mainnet beta for Sunnyside customers and announced Startale/Soneium integration, but no public TVL, contract address index, or production usage telemetry was found. Aztec is live in Alpha with explicit security caveats. Zama mainnet is live with early applications and integrations, but the ecosystem is still small." },
+    { term: "EVM compatible", def: "Privacy protocol runs on or integrates natively with EVM chains. Railgun on Ethereum/Polygon/Arbitrum/BSC. Tornado Cash was Ethereum-native. Zama\u2019s fhEVM, Tempo, and Privacy Boost are EVM-compatible. USX runs on Scroll. STRK20 runs on Cairo VM. Aztec uses Noir. Aleo uses Leo. Midnight uses Compact." },
+    { term: "Account abstraction", def: "Privacy works with multisig, session keys, social recovery, passkeys, or sponsored transactions at the protocol level. STRK20 and Aztec have native protocol-level AA. Tempo has native account-abstraction-style transaction features and passkeys. Privacy Boost works with EOAs and app SDKs but does not provide native protocol-level account abstraction. Others require standard key management or app-specific abstractions." },
+    { term: "Hardware wallet support", def: "Users can sign privacy transactions with a hardware wallet. Monero: Ledger full shielded. Zcash: hardware-wallet support is limited; official Trezor docs say shielded z-address transactions are not compatible. Solana has Ledger support, but confidential transfers are disabled on mainnet. Starknet has Ledger for standard transactions, but STRK20 privacy transactions are not yet available on hardware wallets. Tempo uses passkey AA but no hardware-wallet path for confidential transfers is published. Midnight has announced Keystone and other wallet partners, but privacy-transaction hardware flows are not yet clearly documented. Aztec, Aleo, USX, and Privacy Boost do not have documented privacy-transaction hardware-wallet support." },
   ]},
 ];
