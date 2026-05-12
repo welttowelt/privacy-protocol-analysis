@@ -140,7 +140,7 @@ const fullFootnotes = {
   9: sourced("access-control privacy model (parties see only their part of a transaction). fundamentally different from ZK-based privacy: counterparties and validators see your data", ["canton-overview", "canton-requirements"]),
   10: sourced("DeFi exists within Canton\u2019s own Daml ecosystem. requires Daml, a separate smart contract language. not composable with Ethereum/Starknet DeFi", ["canton-defi", "canton-overview"]),
   11: sourced("horizontal scaling via network-of-networks. each node only processes its own transactions. claims no upper bound on TPS, but access-control privacy model", ["canton-overview", "canton-security"]),
-  12: sourced("mainnet since Sep 2024. USDCx with Circle launched Jan 2026. 350+ apps on testnet. but DeFi ecosystem still nascent", ["aleo-mainnet", "circle-xreserve"]),
+  12: sourced("mainnet since Sep 2024. Circle xReserve added support for USDCx on Aleo mainnet and testnet on Jan 27, 2026. Aleo's Sep 2024 launch post cited 350 applications deployed on Aleo and over 350 teams built or building, but the live DeFi ecosystem is still nascent", ["aleo-mainnet", "circle-xreserve"]),
   13: sourced("off-chain execution model enables scalable private computation, but no composability between private applications limits real-world DeFi throughput", ["aleo-docs"]),
   14: sourced("official hardware-wallet support is limited: Trezor\u2019s Zcash page says shielded z-address transactions are not compatible, while Ledger\u2019s public page documents ZEC wallet support without establishing full shielded Orchard flows", ["zcash-trezor", "zcash-ledger"]),
   15: sourced("PXE client-side proving works but proving times still being optimized. variable depending on circuit complexity", ["aztec-pxe"]),
@@ -200,8 +200,8 @@ const glanceProjects = [
     ticks: [false, false, false, "partial", false, false],
     fnMap: {3: 12} },
   { name: "Canton",
-    ticks: [false, "partial", false, true, false, false],
-    fnMap: {1: 13} },
+    ticks: [false, "partial", false, "partial", false, false],
+    fnMap: {1: 13, 3: 38} },
   { name: "Tornado Cash",
     ticks: ["partial", false, false, "partial", false, "partial"],
     fnMap: {0: 15, 3: 36, 5: 37} },
@@ -260,6 +260,7 @@ const glanceFootnotes = {
   35: sourced("Zama can grant granular decryption permissions via ACL/user decryption, but disclosure is app-defined and not a wallet-level viewing-key model", ["zama-acl", "zama-user-decryption"]),
   36: sourced("the Tornado Cash Classic Compliance Tool can prove a specific deposit/withdrawal link, but it is not broad viewing-key disclosure for ongoing transaction history", ["tornado-compliance"]),
   37: sourced("standard Ethereum wallets can interact with Tornado Cash, but Classic note management and recovery remain separate from normal wallet UX and are not documented as hardware-wallet-native", ["tornado-how", "tornado-backups"]),
+  38: sourced("Canton provides sub-transaction privacy and full auditability through access control, but this is not user-issued ZK viewing-key disclosure", ["canton-overview", "canton-requirements"]),
 };
 
 // Column definitions grouped by category
