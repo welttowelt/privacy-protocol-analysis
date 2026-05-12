@@ -60,7 +60,7 @@ Thanks to [Micah Zoltu](https://github.com/MicahZoltu) for pointing out that the
 
 ## Contributing
 
-This grid is only as good as the community keeping it accurate. Contributions are welcome from anyone — protocol teams, researchers, users.
+This grid is only as good as the evidence behind it. External contributions are welcome from protocol teams, researchers, and users, with changes reviewed before they are merged.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
