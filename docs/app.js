@@ -5,14 +5,16 @@
 const SCALABLE_COL_IDX = 10;
 
 function renderTickInner(tick, fnMap, colIdx) {
+  const fnNum = fnMap[colIdx];
+  const sup = fnNum ? `<sup>${fnNum}</sup>` : '';
+  const footnoteClass = fnNum ? ' tick-with-footnote' : '';
+  const footnoteData = fnNum ? ` data-fn="${fnNum}"` : '';
   if (tick === true) {
-    return '<span class="tick-full">\u2713</span>';
+    return `<span class="tick-full${footnoteClass}"${footnoteData}>\u2713${sup}</span>`;
   } else if (tick === "partial") {
-    const fnNum = fnMap[colIdx];
-    const sup = fnNum ? `<sup>${fnNum}</sup>` : '';
-    return `<span class="tick-partial" data-fn="${fnNum || ''}">(&#x2713;)${sup}</span>`;
+    return `<span class="tick-partial${footnoteClass}"${footnoteData}>(&#x2713;)${sup}</span>`;
   }
-  return '<span class="tick-dash">\u2013</span>';
+  return `<span class="tick-dash${footnoteClass}"${footnoteData}>\u2013${sup}</span>`;
 }
 
 function renderTick(tick, fnMap, colIdx, metric) {
@@ -101,19 +103,52 @@ defList.innerHTML = definitions.map(group => {
   return `<div class="def-category">${group.category}</div>${entries}`;
 }).join('');
 
-// === Tooltip on partial ticks ===
-// Full grid and glance grid reuse the same footnote numbers (1–17) to
+function getDefinition(term) {
+  for (const group of definitions) {
+    const match = group.entries.find(entry => entry.term === term);
+    if (match) return match.def;
+  }
+  return '';
+}
+
+function attachHeaderTooltips(tableId, terms) {
+  const headers = document.querySelectorAll(`#${tableId} .header-row th:not(.sticky-col)`);
+  headers.forEach((header, idx) => {
+    const item = terms[idx];
+    if (!item) return;
+    const term = typeof item === 'string' ? item : item.term;
+    const help = typeof item === 'string' ? getDefinition(term) : item.def;
+    if (!help) return;
+    header.classList.add('has-column-help');
+    header.dataset.columnHelp = help;
+    header.setAttribute('aria-label', `${term}: ${help}`);
+    header.insertAdjacentHTML('beforeend', '<span class="column-help-dot" aria-hidden="true">?</span>');
+  });
+}
+
+attachHeaderTooltips('full-grid', fullColumnTerms);
+attachHeaderTooltips('glance-grid', glanceColumnHelp);
+
+// === Tooltips ===
+// Full grid and glance grid reuse some footnote numbers to
 // reference different text. Look up from the correct table based on which
 // grid the tick belongs to, otherwise tooltips for overlapping numbers
 // would show the wrong footnote.
 const tooltip = document.getElementById('tooltip');
 
 document.addEventListener('mouseover', (e) => {
-  const partial = e.target.closest('.tick-partial');
-  if (!partial) return;
-  const fnNum = parseInt(partial.dataset.fn);
+  const header = e.target.closest('[data-column-help]');
+  if (header) {
+    tooltip.textContent = header.dataset.columnHelp;
+    tooltip.classList.add('visible');
+    return;
+  }
+
+  const footnoted = e.target.closest('.tick-with-footnote');
+  if (!footnoted) return;
+  const fnNum = parseInt(footnoted.dataset.fn);
   if (!fnNum) return;
-  const footnotes = partial.closest('.glance-grid') ? glanceFootnotes : fullFootnotes;
+  const footnotes = footnoted.closest('.glance-grid') ? glanceFootnotes : fullFootnotes;
   const note = footnotes[fnNum];
   if (!note) return;
   tooltip.textContent = getFootnoteText(note);
@@ -129,8 +164,8 @@ document.addEventListener('mousemove', (e) => {
 });
 
 document.addEventListener('mouseout', (e) => {
-  const partial = e.target.closest('.tick-partial');
-  if (partial) tooltip.classList.remove('visible');
+  const tooltipTarget = e.target.closest('[data-column-help], .tick-with-footnote');
+  if (tooltipTarget) tooltip.classList.remove('visible');
 });
 
 // === Twitter/X share links ===

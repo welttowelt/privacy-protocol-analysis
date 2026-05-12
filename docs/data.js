@@ -36,8 +36,9 @@ const sourceRefs = {
   "railgun-wallet": { label: "RAILGUN Wallet SDK", url: "https://docs.railgun.org/developer-guide/" },
   "railgun-poi": { label: "RAILGUN Private POI", url: "https://docs.railgun.org/wiki/assurance/private-proofs-of-innocence" },
   "tornado-how": { label: "Tornado Cash docs", url: "https://docs.tornado.cash/general/how-does-tornado-cash-work" },
+  "tornado-compliance": { label: "Tornado Cash compliance tool", url: "https://docs.tornado.cash/tornado-cash-classic/compliance-tool" },
+  "tornado-backups": { label: "Tornado Cash onchain backups", url: "https://tornado-cash.medium.com/tornado-cash-adds-on-chain-deposit-backups-dbef9ac9e61d" },
   "tornado-setup": { label: "Tornado trusted setup", url: "https://tornado-cash.medium.com/tornado-cash-trusted-setup-ceremony-b846e1e00be1" },
-  "tornado-delisting": { label: "OFAC delisting notice", url: "https://www.govinfo.gov/content/pkg/FR-2025-03-26/pdf/2025-05048.pdf" },
   "zama-protocol": { label: "Zama protocol docs", url: "https://docs.zama.org/protocol/protocol/overview" },
   "zama-fhevm": { label: "Zama fhEVM", url: "https://www.zama.ai/products-and-services/fhevm" },
   "zama-hcu": { label: "Zama HCU docs", url: "https://docs.zama.org/protocol/solidity-guides/development-guide/hcu" },
@@ -107,9 +108,8 @@ const fullProjects = [
     fnMap: {4: 9, 12: 10, 10: 11},
     scalable: "no global cap" },
   { name: "Tornado Cash",
-    ticks: [false, true, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false],
-    fnMap: {},
-    status: "legacy" },
+    ticks: [false, true, false, false, "partial", false, false, false, false, false, false, false, false, true, true, false, "partial"],
+    fnMap: {2: 43, 4: 44, 16: 45} },
   { name: "Zama (FHE)",
     ticks: ["partial", false, false, false, "partial", true, "partial", false, false, false, false, "partial", false, "partial", true, false, false],
     fnMap: {0: 7, 4: 42, 6: 6, 11: 41, 13: 33},
@@ -171,6 +171,9 @@ const fullFootnotes = {
   40: sourced("epoch batching gives one Groth16 proof per batch and docs estimate 300+ sustained TPS at Base gas target or 1,800+ TPS at gas limit, but no public production telemetry was found. no TPS sublabel is shown for claimed or theoretical figures", ["privacyboost-protocol", "privacyboost-trust"]),
   41: sourced("fhEVM supports confidential Solidity contracts over encrypted types and operations, so Zama gets programmable privacy credit. marked partial because execution relies on FHE coprocessors and HCU limits rather than succinct onchain proof verification", ["zama-protocol", "zama-hcu"]),
   42: sourced("FHEVM ACL and user decryption can grant selected users or contracts access to encrypted values, but this is app-defined access control rather than a standard user-issued transaction-history viewing key", ["zama-acl", "zama-user-decryption"]),
+  43: sourced("Tornado Cash Classic deposit notes include independent note material derived from a nullifier and secret. encrypted onchain backups improve recovery UX, but they do not remove the per-note secret/nullifier model", ["tornado-how", "tornado-backups"]),
+  44: sourced("the Tornado Cash Classic Compliance Tool can prove that a specific withdrawal came from a specific deposit. this is useful selective disclosure, but narrower than a reusable viewing-key model for ongoing transaction history", ["tornado-compliance"]),
+  45: sourced("standard Ethereum wallets can sign the EVM transaction path, but the Tornado Cash Classic privacy note, backup, and recovery flow is not documented as a hardware-wallet-native shielded transaction flow", ["tornado-how", "tornado-backups"]),
 };
 
 // At-a-glance data — 6 properties x 14 protocols
@@ -200,8 +203,8 @@ const glanceProjects = [
     ticks: [false, "partial", false, true, false, false],
     fnMap: {1: 13} },
   { name: "Tornado Cash",
-    ticks: ["partial", false, false, false, false, false],
-    fnMap: {0: 15} },
+    ticks: ["partial", false, false, "partial", false, "partial"],
+    fnMap: {0: 15, 3: 36, 5: 37} },
   { name: "Zama (FHE)",
     ticks: ["partial", false, false, "partial", "partial", false],
     fnMap: {0: 16, 3: 35, 4: 14} },
@@ -223,7 +226,7 @@ const glanceFootnotes = {
   1: sourced("Starknet has full AA and wallet integration (Braavos, Argent), but STRK20 privacy transactions are not yet available on hardware wallets", ["starknet-accounts", "starknet-ledger", "strk20-overview"]),
   2: sourced("formally ZK proofs, but single-asset only (ZEC), no multi-asset pool, poor note discovery UX", ["zcash-nu5", "zcash-orchard-keys"]),
   3: sourced("official hardware-wallet support is limited: Trezor\u2019s Zcash page says shielded z-address transactions are not compatible, while Ledger\u2019s public page documents ZEC wallet support without establishing full shielded Orchard flows", ["zcash-trezor", "zcash-ledger"]),
-  4: sourced("always-on privacy with strongest anonymity set, but no multi-asset pool, no formal ZK proofs, no secretless design", ["monero-specs", "monero-cli"]),
+  4: sourced("always-on privacy with strong anonymity properties, but no multi-asset pool, no formal ZK proofs, and a separate spend/view key model", ["monero-specs", "monero-cli"]),
   5: sourced("incoming viewing keys only. can\u2019t reliably verify outgoing or balance", ["monero-cli"]),
   6: sourced("Ledger supports full shielded transactions, but no account abstraction", ["ledger-monero", "monero-specs"]),
   7: sourced("Alpha Mainnet since March 31, 2026 — smart contracts live but DeFi ecosystem still bootstrapping. cold start problem. Aztec has also published alpha-stage security warnings after a March 27, 2026 critical vulnerability disclosure", ["aztec-networks", "aztec-vuln"]),
@@ -234,7 +237,7 @@ const glanceFootnotes = {
   12: sourced("auditor key exists in config but entire feature is disabled on mainnet", ["solana-confidential"]),
   13: sourced("DeFi within own Daml ecosystem only. requires separate smart contract language", ["canton-defi", "canton-overview"]),
   14: sourced("TFHE is lattice-based (PQ-resistant) and no trusted setup, but no succinct verifiability", ["zama-protocol"]),
-  15: sourced("formally ZK (Groth16), but fragmented pools (fixed denominations) and timing analysis could de-anonymize users. legacy protocol; OFAC sanctions were lifted in March 2025, but the original product remains a high-risk historical mixer rather than a modern maintained privacy app", ["tornado-how", "tornado-setup", "tornado-delisting"]),
+  15: sourced("Tornado Cash Classic is formally ZK (Groth16), with long-running deployed contracts, but pools are fragmented by fixed denomination and timing analysis can still de-anonymize users", ["tornado-how", "tornado-setup"]),
   16: sourced("FHE genuinely encrypts data during computation, but server-side model (not client-side ZK proofs). different trust model. ecosystem nascent", ["zama-protocol", "zama-fhevm"]),
   17: sourced("privacy is always on so there\u2019s no shielding step (zero friction to opt in). ~2 min block time for confirmations. seamless UX but slower than Starknet", ["monero-specs"]),
   18: sourced("opt-in privacy, not private by default. privacy cryptography not publicly documented. uses TIP-403 Policy Registry for issuer compliance and auditability", ["tempo-transactions"]),
@@ -255,6 +258,8 @@ const glanceFootnotes = {
   33: sourced("works with MetaMask, WalletConnect, and EOAs, but the privacy account still derives separate auth, viewing, and nullifying keys and no hardware-wallet privacy flow is documented", ["privacyboost-overview", "privacyboost-keys"]),
   34: sourced("Tempo selective disclosure remains partial because the docs describe it for a future private-token standard, not a live universal disclosure mechanism", ["tempo-privacy", "tempo-tip403"]),
   35: sourced("Zama can grant granular decryption permissions via ACL/user decryption, but disclosure is app-defined and not a wallet-level viewing-key model", ["zama-acl", "zama-user-decryption"]),
+  36: sourced("the Tornado Cash Classic Compliance Tool can prove a specific deposit/withdrawal link, but it is not broad viewing-key disclosure for ongoing transaction history", ["tornado-compliance"]),
+  37: sourced("standard Ethereum wallets can interact with Tornado Cash, but Classic note management and recovery remain separate from normal wallet UX and are not documented as hardware-wallet-native", ["tornado-how", "tornado-backups"]),
 };
 
 // Column definitions grouped by category
@@ -262,9 +267,9 @@ const definitions = [
   { category: "Privacy Model", entries: [
     { term: "Multi-asset privacy pool", def: "Single pool supports multiple token types. Observers can\u2019t tell which token a note belongs to. STRK20, Aztec, Railgun, and Privacy Boost have full multi-asset pools. Midnight supports multiple shielded token types, but the docs do not yet establish one shared anonymity pool. Zama supports confidential ERC-20s via fhEVM but ecosystem is nascent. Aleo is asset-agnostic but each program has isolated state. Zcash/Monero are single-asset. Tornado Cash had fragmented pools. Canton uses access-control privacy." },
     { term: "Formally ZK proofs", def: "The proof system has the mathematical zero-knowledge property: the proof guarantees that no information about the secret data leaks to the verifier. Zcash (Groth16/Halo 2), Aztec (PLONK/Honk), Aleo (Varuna), Railgun (Groth16), Privacy Boost (Groth16/BN254), and Tornado Cash (Groth16) use formally ZK proof systems. STRK20 is marked partial: public STRK20 copy says zero-knowledge-backed private transactions, while public S-two docs say the zero-knowledge feature was not available at time of writing. Monero uses ring signatures. Solana uses ElGamal. Canton uses access control." },
-    { term: "Secretless (no per-note keys)", def: "Users handle a single signing key (or none, via AA). No per-note secrets to manage or lose. STRK20 derives all keys from the Starknet account key via account abstraction. Privacy Boost derives auth, viewing, and nullifying keys from a seed in addition to the user's EOA key. Aztec requires 4 separate key pairs. Aleo requires private key + view key. Railgun requires spending + viewing keys. Monero requires spend + view keys." },
+    { term: "No user-managed note secrets", def: "Users do not need to preserve independent per-note secret material outside their normal account model. This does not mean the protocol has no cryptographic secrets. STRK20 derives all keys from the Starknet account key via account abstraction. Tornado Cash Classic keeps a per-note secret/nullifier model, even though encrypted onchain backups improve recovery UX. Privacy Boost derives auth, viewing, and nullifying keys from a seed in addition to the user's EOA key. Aztec requires 4 separate key pairs. Aleo requires private key + view key. Railgun requires spending + viewing keys. Monero requires spend + view keys." },
     { term: "Efficient note discovery", def: "Recipients discover funds in time proportional to their own activity. STRK20 uses onchain indexed storage with shared secrets. Privacy Boost provides fast note discovery through a TEE indexer that decrypts and serves metadata, with manual recovery by scanning onchain events. Aztec uses a tagging mechanism but requires pre-registering senders. Midnight separates public onchain state from private local state and ships an indexer, but note-discovery guarantees are not yet documented precisely. Zcash requires scanning all blocks. Railgun and Aleo use standard record/UTXO scanning." },
-    { term: "Selective disclosure", def: "Users can optionally reveal transaction history to a chosen third party without affecting other users\u2019 privacy. STRK20 has third-party viewing keys. Zcash has full viewing keys. Aztec has viewing key pairs. Aleo has view keys plus zPass. Railgun has scoped viewing keys plus PPOI. Midnight exposes selective disclosure through witness functions. Zama offers app-defined ACL and user-decryption flows for encrypted values, not a standard wallet-level viewing-key model. Privacy Boost exposes compliance-oriented audit API access to a TEE-indexed database rather than user-issued viewing keys. Tempo describes issuer/regulator selective disclosure for planned private tokens. USX exposes regulatory view keys. Canton has sub-transaction privacy with full auditability, but it is an access-control model rather than ZK-style user-issued disclosure." },
+    { term: "Selective disclosure", def: "Users can optionally reveal transaction history to a chosen third party without affecting other users\u2019 privacy. STRK20 has third-party viewing keys. Zcash has full viewing keys. Aztec has viewing key pairs. Aleo has view keys plus zPass. Railgun has scoped viewing keys plus PPOI. Tornado Cash Classic has a Compliance Tool for proving a specific deposit/withdrawal link, but not broad viewing-key disclosure. Midnight exposes selective disclosure through witness functions. Zama offers app-defined ACL and user-decryption flows for encrypted values, not a standard wallet-level viewing-key model. Privacy Boost exposes compliance-oriented audit API access to a TEE-indexed database rather than user-issued viewing keys. Tempo describes issuer/regulator selective disclosure for planned private tokens. USX exposes regulatory view keys. Canton has sub-transaction privacy with full auditability, but it is an access-control model rather than ZK-style user-issued disclosure." },
   ]},
   { category: "Cryptographic Foundation", entries: [
     { term: "No trusted setup", def: "Proof system requires no trusted setup ceremony. STARKs (Starknet) require none. Zcash Orchard uses Halo 2 (no setup) but Sapling still has one. Monero\u2019s Bulletproofs+ and Solana\u2019s ElGamal/Bulletproofs require none. Aleo uses Varuna (requires universal SRS). Aztec\u2019s PLONK uses a universal updatable SRS. Midnight\u2019s current stack references a Midnight SRS. Railgun, Privacy Boost, and Tornado Cash use Groth16 (per-circuit ceremonies). Tempo private-token cryptography is not yet publicly specified." },
@@ -279,9 +284,38 @@ const definitions = [
   ]},
   { category: "Ecosystem & Access", entries: [
     { term: "DeFi composability", def: "Existing DeFi contracts require zero custom integration for private transactions. STRK20 and Railgun work with existing live protocols. Aztec, Canton, Midnight, Tempo, and Aleo require building inside their own app environments or token standards. Privacy Boost is an SDK/app integration layer around shielded deposits, transfers, and withdrawals; private DeFi is roadmap rather than zero-integration composability today. USX routes through a specific private-transfer flow rather than arbitrary DeFi composability." },
-    { term: "Existing ecosystem", def: "Live DeFi protocols, real liquidity, real users already present. Starknet, Zcash, Monero, Railgun, Solana, and Canton all have established ecosystems. Aleo mainnet since Sep 2024, DeFi nascent. Tempo mainnet launched in March 2026 with named design partners, but the live ecosystem is early. Midnight mainnet launched in March 2026, ecosystem early. USX is live on Scroll with modest TVL. Privacy Boost is live as an OP Mainnet beta for Sunnyside customers and announced Startale/Soneium integration, but no public TVL, contract address index, or production usage telemetry was found. Aztec is live in Alpha with explicit security caveats. Zama mainnet is live with early applications and integrations, but the ecosystem is still small." },
+    { term: "Existing ecosystem", def: "Live protocols, real liquidity, real users already present. Starknet, Zcash, Monero, Railgun, Solana, Canton, and Tornado Cash all have established deployed ecosystems. Aleo mainnet since Sep 2024, DeFi nascent. Tempo mainnet launched in March 2026 with named design partners, but the live ecosystem is early. Midnight mainnet launched in March 2026, ecosystem early. USX is live on Scroll with modest TVL. Privacy Boost is live as an OP Mainnet beta for Sunnyside customers and announced Startale/Soneium integration, but no public TVL, contract address index, or production usage telemetry was found. Aztec is live in Alpha with explicit security caveats. Zama mainnet is live with early applications and integrations, but the ecosystem is still small." },
     { term: "EVM compatible", def: "Privacy protocol runs on or integrates natively with EVM chains. Railgun on Ethereum/Polygon/Arbitrum/BSC. Tornado Cash was Ethereum-native. Zama\u2019s fhEVM, Tempo, and Privacy Boost are EVM-compatible. USX runs on Scroll. STRK20 runs on Cairo VM. Aztec uses Noir. Aleo uses Leo. Midnight uses Compact." },
     { term: "Account abstraction", def: "Privacy works with multisig, session keys, social recovery, passkeys, or sponsored transactions at the protocol level. STRK20 and Aztec have native protocol-level AA. Tempo has native account-abstraction-style transaction features and passkeys. Privacy Boost works with EOAs and app SDKs but does not provide native protocol-level account abstraction. Others require standard key management or app-specific abstractions." },
-    { term: "Hardware wallet support", def: "Users can sign privacy transactions with a hardware wallet. Monero: Ledger full shielded. Zcash: hardware-wallet support is limited; official Trezor docs say shielded z-address transactions are not compatible. Solana has Ledger support, but confidential transfers are disabled on mainnet. Starknet has Ledger for standard transactions, but STRK20 privacy transactions are not yet available on hardware wallets. Tempo uses passkey AA but no hardware-wallet path for confidential transfers is published. Midnight has announced Keystone and other wallet partners, but privacy-transaction hardware flows are not yet clearly documented. Aztec, Aleo, USX, and Privacy Boost do not have documented privacy-transaction hardware-wallet support." },
+    { term: "Hardware wallet support", def: "Users can sign privacy transactions with a hardware wallet. Monero: Ledger full shielded. Zcash: hardware-wallet support is limited; official Trezor docs say shielded z-address transactions are not compatible. Tornado Cash gets partial credit because hardware wallets can sign Ethereum transactions, but the note/backup/recovery flow is not hardware-wallet-native. Solana has Ledger support, but confidential transfers are disabled on mainnet. Starknet has Ledger for standard transactions, but STRK20 privacy transactions are not yet available on hardware wallets. Tempo uses passkey AA but no hardware-wallet path for confidential transfers is published. Midnight has announced Keystone and other wallet partners, but privacy-transaction hardware flows are not yet clearly documented. Aztec, Aleo, USX, and Privacy Boost do not have documented privacy-transaction hardware-wallet support." },
   ]},
+];
+
+const fullColumnTerms = [
+  "Multi-asset privacy pool",
+  "Formally ZK proofs",
+  "No user-managed note secrets",
+  "Efficient note discovery",
+  "Selective disclosure",
+  "No trusted setup",
+  "Post-quantum proof system",
+  "Succinct verifiability",
+  "Fast shield/unshield",
+  "End-to-end transaction time",
+  "Scalable private transactions",
+  "Programmable privacy",
+  "DeFi composability",
+  "Existing ecosystem",
+  "EVM compatible",
+  "Account abstraction",
+  "Hardware wallet support",
+];
+
+const glanceColumnHelp = [
+  { term: "Private by design", def: "Whether privacy is the default product path, not an extra integration or mostly public flow." },
+  { term: "Composable funds", def: "Whether private funds can be used freely with apps or DeFi without unshielding first." },
+  { term: "Fast to use", def: "Whether the user-visible private transaction path feels fast enough for normal wallet use." },
+  { term: "Selective disclosure", def: "Whether users or institutions can disclose specific transaction information for audits or compliance." },
+  { term: "Future-proof security", def: "Whether the cryptography avoids trusted setup risk and has a credible post-quantum path." },
+  { term: "Wallet ready", def: "Whether normal wallets, hardware wallets, or account abstraction can support the privacy flow without fragile key handling." },
 ];

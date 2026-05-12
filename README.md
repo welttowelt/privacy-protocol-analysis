@@ -12,7 +12,7 @@ This grid exists so that builders, researchers, and users can see where things s
 
 | Category | Properties |
 |---|---|
-| **Privacy Model** | Multi-asset privacy pool, Formally ZK proofs, Secretless (no per-note keys), Efficient note discovery, Selective disclosure |
+| **Privacy Model** | Multi-asset privacy pool, Formally ZK proofs, No user-managed note secrets, Efficient note discovery, Selective disclosure |
 | **Cryptographic Foundation** | No trusted setup, Post-quantum proof system, Succinct verifiability |
 | **Performance & UX** | Fast shield/unshield, End-to-end transaction time, Scalable private transactions, Programmable privacy |
 | **Ecosystem & Access** | DeFi composability, Existing ecosystem, EVM compatible, Account abstraction, Hardware wallet support |
@@ -54,7 +54,9 @@ This grid is currently maintained by StarkWare employees. Contributions are open
 
 ## Acknowledgements
 
-Thanks to [lucadonnoh](https://github.com/lucadonnoh) for pointing out that calling Tornado Cash "defunct" was too strong; the grid now labels it as a legacy protocol instead.
+Thanks to [lucadonnoh](https://github.com/lucadonnoh) for pointing out that calling Tornado Cash "defunct" was too strong.
+
+Thanks to [Micah Zoltu](https://github.com/MicahZoltu) for pointing out that the Tornado Cash row overstated the legacy framing and understated ecosystem, selective-disclosure, and wallet support.
 
 ## Contributing
 
