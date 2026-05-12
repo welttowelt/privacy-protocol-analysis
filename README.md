@@ -50,7 +50,7 @@ python3 -m http.server 8080
 
 ## Maintainers
 
-This grid is currently maintained by StarkWare employees. Contributions are open — anyone can submit issues and pull requests, and we review them on merit regardless of affiliation.
+Current contributions come mainly from StarkWare employees. The project is open to outside issues and pull requests, and submissions are reviewed on merit regardless of affiliation.
 
 ## Acknowledgements
 

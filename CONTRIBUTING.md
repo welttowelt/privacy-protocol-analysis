@@ -1,6 +1,6 @@
 # Contributing
 
-This is a community-maintained resource. The goal is an honest, well-sourced overview that helps everyone understand what each privacy protocol does and where things are headed.
+This is an open contribution resource. The goal is an honest, well-sourced overview that helps everyone understand what each privacy protocol does and where things are headed.
 
 ## Principles
 
