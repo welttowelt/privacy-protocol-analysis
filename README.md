@@ -8,7 +8,7 @@ This grid exists so that builders, researchers, and users can see where things s
 
 ## What's in the grid
 
-**14 protocols** across **17 properties** in 4 categories:
+**15 protocols** across **17 properties** in 4 categories:
 
 | Category | Properties |
 |---|---|
@@ -19,7 +19,7 @@ This grid exists so that builders, researchers, and users can see where things s
 
 ### Protocols covered
 
-STRK20 (Starknet) · Zcash · Monero · Aztec · Aleo · Railgun · Solana Confidential · Canton · Tornado Cash · Zama (FHE) · Tempo · Midnight · USX Private Transfer · Privacy Boost
+STRK20 (Starknet) · Tongo (Starknet) · Zcash · Monero · Aztec · Aleo · Railgun · Solana Confidential · Canton · Tornado Cash · Zama (FHE) · Tempo · Midnight · USX Private Transfer · Privacy Boost
 
 **Missing a protocol?** Open a PR to add it.
 
@@ -57,6 +57,8 @@ Current contributions come mainly from StarkWare employees. The project is open 
 Thanks to [lucadonnoh](https://github.com/lucadonnoh) for pointing out that calling Tornado Cash "defunct" was too strong.
 
 Thanks to [Micah Zoltu](https://github.com/MicahZoltu) for pointing out that the Tornado Cash row overstated the legacy framing and understated ecosystem, selective-disclosure, and wallet support.
+
+Thanks to the [PSE private-transfers-benchmarks](https://github.com/privacy-ethereum/private-transfers-benchmarks) team for the Tongo confidentiality-vs-anonymity distinction.
 
 ## Contributing
 
