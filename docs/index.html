@@ -37,7 +37,7 @@
 <!-- Open Graph -->
 <meta property="og:title" content="Privacy Protocol Grid">
 <meta property="og:description" content="What 15 crypto privacy protocols actually deliver: STRK20, Tongo, Zcash, Monero, Aztec, Aleo, Railgun, Midnight, Tempo, USX, Privacy Boost. 17 properties, sources listed in footnotes.">
-<meta property="og:image" content="https://privacygrid.dev/privacy_grid_image_v19.png">
+<meta property="og:image" content="https://privacygrid.dev/privacy_grid_image_v20.png">
 <meta property="og:image:width" content="6000">
 <meta property="og:image:height" content="1462">
 <meta property="og:url" content="https://privacygrid.dev/">
@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Privacy Protocol Grid">
 <meta name="twitter:description" content="15 protocols. 17 properties. Sources in footnotes.">
-<meta name="twitter:image" content="https://privacygrid.dev/privacy_grid_image_v19.png">
+<meta name="twitter:image" content="https://privacygrid.dev/privacy_grid_image_v20.png">
 <meta name="twitter:image:alt" content="Privacy Protocol Grid comparing 15 protocols across 17 properties">
 
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -167,7 +167,7 @@
         <span class="legend-item"><span class="tick-dash">&ndash;</span> = not present</span>
       </div>
       <div class="share-bar">
-        <a href="privacy_grid_image_v19.png" download="privacy_protocol_grid.png" class="share-btn download-btn">
+        <a href="privacy_grid_image_v20.png" download="privacy_protocol_grid.png" class="share-btn download-btn">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9m0 0L5 7m3 3l3-3M2 12v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Download image
         </a>
@@ -211,7 +211,7 @@
         <span class="legend-item"><span class="tick-dash">&ndash;</span> = no</span>
       </div>
       <div class="share-bar">
-        <a href="privacy_at_a_glance_image_v19.png" download="privacy_at_a_glance.png" class="share-btn download-btn">
+        <a href="privacy_at_a_glance_image_v20.png" download="privacy_at_a_glance.png" class="share-btn download-btn">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9m0 0L5 7m3 3l3-3M2 12v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Download image
         </a>
@@ -379,7 +379,7 @@
 <!-- Tooltip -->
 <div class="tooltip" id="tooltip"></div>
 
-<script src="data_v21.js"></script>
+<script src="data_v22.js"></script>
 <script src="app.js?v=7"></script>
 <!-- Crawler-only prose + FAQ (visually hidden, readable by search engines and LLMs) -->
 <div class="sr-only">
@@ -389,9 +389,9 @@
   <h3>Privacy model</h3>
   <p>STRK20 on Starknet, Aztec, Railgun, and Privacy Boost all support multi-asset privacy pools, meaning multiple token types share a single anonymity set. Midnight supports multiple shielded token types, but its docs do not yet establish one canonical shared pool. Tongo on Starknet is different: it encrypts balances and transfer amounts, but does not hide sender/receiver accounts or asset type, so it is confidential rather than anonymous. Zcash and Monero are single-asset only. STRK20 is one of the few rows where users are not expected to preserve separate per-note secret material outside the normal account flow, and it pairs that model with Starknet account abstraction. Most other protocols require two or more key pairs or independent note material. For selective disclosure, STRK20, Zcash, Aztec, Aleo, Railgun, and Midnight all offer user-controlled ways to reveal transaction history to a chosen third party; Tornado Cash Classic supports a narrower Compliance Tool for proving a specific deposit/withdrawal link; Tempo, USX, Privacy Boost, and Tongo expose more issuer-, operator-, auditor-, or regulator-oriented disclosure paths.</p>
   <h3>Cryptographic foundation</h3>
-  <p>STRK20 uses STARKs, which require no trusted setup and are post-quantum resistant by design (hash-based). Its formal zero-knowledge row is marked partial because STRK20 public copy describes zero-knowledge-backed private transactions, while public S-two docs still say the zero-knowledge feature was not available at time of writing. Tongo uses ElGamal over the Stark curve with Sigma-style zero-knowledge proofs and no trusted setup, but it is not post-quantum. Zcash's Orchard upgrade uses Halo 2 (no setup), but its older Sapling pool still relies on a trusted ceremony. Aztec uses PLONK with a universal updatable SRS. Railgun, Privacy Boost, and Tornado Cash use Groth16, which requires per-circuit ceremonies. On post-quantum security, STARKs (Starknet) and TFHE lattice-based cryptography (Zama) are the two approaches in the grid treated as quantum-resistant, with Zama marked partial because its model is not succinct ZK verification.</p>
+  <p>STRK20 uses STARKs, which require no trusted setup and are post-quantum resistant by design (hash-based). Its formal zero-knowledge row is marked partial because STRK20 public copy describes zero-knowledge-backed private transactions, while public S-two docs still say the zero-knowledge feature was not available at time of writing. Tongo uses ElGamal over the Stark curve with Sigma-style zero-knowledge proofs and no trusted setup; zkSecurity audited Tongo and its SHE library in October 2025, but Tongo is still elliptic-curve based and not post-quantum. Zcash's Orchard upgrade uses Halo 2 (no setup), but its older Sapling pool still relies on a trusted ceremony. Aztec uses PLONK with a universal updatable SRS. Railgun, Privacy Boost, and Tornado Cash use Groth16, which requires per-circuit ceremonies. On post-quantum security, STARKs (Starknet) and TFHE lattice-based cryptography (Zama) are the two approaches in the grid treated as quantum-resistant, with Zama marked partial because its model is not succinct ZK verification.</p>
   <h3>Performance and UX</h3>
-  <p>STRK20 offers one of the fastest disclosed user-facing shielding paths: ~2s block confirmation plus sub-5s proof generation in the current backend-prover fast path. The grid separates that from client-side/mobile proving, which is still a roadmap item for STRK20. Tongo has no mandatory funding, withdrawal, or ragequit wait beyond Starknet transaction confirmation, but no public end-to-end private-transfer benchmark was found. Zcash is bottlenecked by ~75s block times. Privacy Boost advertises sub-500ms TEE proof generation and high throughput through epoch batching, but transfers settle when relays submit epochs and the privacy path depends on an enclave operator. Aztec runs ~6s blocks in Alpha Mainnet (launched March 31, 2026), but Aztec's own Alpha security posts describe the network as experimental alpha software with known vulnerabilities and caution users about value at risk. Midnight uses client-side proving on a roughly 6-second block cadence, but has not yet published a public mainnet latency benchmark. Railgun imposes a mandatory 1-hour standby after shielding. Monero is always private by default but has no opt-out to a transparent state. For scalability, the grid no longer prints base-chain TPS as STRK20 private-transfer TPS; Aztec currently processes about 1 TPS in its Alpha phase.</p>
+  <p>STRK20 offers one of the fastest disclosed user-facing shielding paths: ~2s block confirmation plus sub-5s proof generation in the current backend-prover fast path. The grid separates that from client-side/mobile proving, which is still a roadmap item for STRK20. Tongo has no mandatory funding, withdrawal, or ragequit wait beyond Starknet transaction confirmation, but its speed rows are partial because no public end-to-end private-transfer wallet/proving benchmark was found. Zcash is bottlenecked by ~75s block times. Privacy Boost advertises sub-500ms TEE proof generation and high throughput through epoch batching, but transfers settle when relays submit epochs and the privacy path depends on an enclave operator. Aztec runs ~6s blocks in Alpha Mainnet (launched March 31, 2026), but Aztec's own Alpha security posts describe the network as experimental alpha software with known vulnerabilities and caution users about value at risk. Midnight uses client-side proving on a roughly 6-second block cadence, but has not yet published a public mainnet latency benchmark. Railgun imposes a mandatory 1-hour standby after shielding. Monero is always private by default but has no opt-out to a transparent state. For scalability, the grid no longer prints base-chain TPS as STRK20 private-transfer TPS; Aztec currently processes about 1 TPS in its Alpha phase.</p>
   <h3>Ecosystem and DeFi</h3>
   <p>STRK20 and Railgun are the only protocols where existing DeFi contracts require zero custom integration for private transactions. Railgun works across Ethereum, Polygon, Arbitrum, and BSC. Tongo, Aztec, Canton, Midnight, Tempo, Aleo, and Privacy Boost have privacy-capable application environments, SDKs, or token standards within their own ecosystems but are not composable with existing Ethereum or Starknet DeFi without custom integration or unshielding. Starknet, Zcash, Monero, Solana, Canton, and Tornado Cash all have established deployed ecosystems with real liquidity or usage history. Tongo is live on Starknet and integrated into Starkzap, but the confidential-transfer ecosystem is still early. Tempo and Midnight are newly live and still early. USX is live on Scroll with a modest footprint, while its private-transfer docs are still marked live soon. Privacy Boost is live as an OP Mainnet beta and has announced Startale/Soneium integration, but public usage telemetry is not yet available. Zama mainnet is live with early applications and infrastructure integrations, but its ecosystem is still nascent.</p>
   <h3>What each protocol is best suited for</h3>
@@ -409,7 +409,7 @@
   </div>
   <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
     <h3 itemprop="name">Which privacy protocols are post-quantum resistant?</h3>
-    <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><p itemprop="text">STRK20 (Starknet) is marked fully post-quantum because STARKs are hash-based and post-quantum by design. Zama receives partial credit: its TFHE stack relies on lattice-based LWE hardness assumptions, but it is not a succinct proof system. SNARK and elliptic-curve-based protocols are vulnerable to quantum attacks.</p></div>
+    <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><p itemprop="text">STRK20 (Starknet) is marked fully post-quantum because STARKs are hash-based and post-quantum by design. Zama receives partial credit: its TFHE stack relies on lattice-based LWE hardness assumptions, but it is not a succinct proof system. Tongo, Zcash, Aztec, Aleo, Railgun, Privacy Boost, and other elliptic-curve-based systems are not treated as post-quantum.</p></div>
   </div>
   <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
     <h3 itemprop="name">What privacy protocols work with ERC-20 tokens?</h3>
@@ -425,7 +425,7 @@
   </div>
   <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
     <h3 itemprop="name">What is the fastest crypto privacy protocol?</h3>
-    <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><p itemprop="text">STRK20 on Starknet has one of the fastest disclosed user-facing shield/unshield paths: ~2 second block confirmation plus sub-5 second proof generation in the current backend-prover fast path. Zcash is bottlenecked by ~75 second block times. Aztec has ~6 second blocks in Alpha Mainnet (launched March 31, 2026). Railgun requires a mandatory 1-hour standby period after shielding.</p></div>
+    <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><p itemprop="text">STRK20 on Starknet has one of the fastest disclosed user-facing shield/unshield paths: ~2 second block confirmation plus sub-5 second proof generation in the current backend-prover fast path. Tongo has no mandatory funding or withdrawal wait beyond Starknet confirmation, but it is marked partial because no public end-to-end wallet/proving benchmark was found. Zcash is bottlenecked by ~75 second block times. Aztec has ~6 second blocks in Alpha Mainnet (launched March 31, 2026). Railgun requires a mandatory 1-hour standby period after shielding.</p></div>
   </div>
 </section>
 </div>

@@ -60,6 +60,8 @@ Thanks to [Micah Zoltu](https://github.com/MicahZoltu) for pointing out that the
 
 Thanks to the [PSE private-transfers-benchmarks](https://github.com/privacy-ethereum/private-transfers-benchmarks) team for the Tongo confidentiality-vs-anonymity distinction.
 
+Thanks to [zkSecurity](https://reports.zksecurity.xyz/reports/tongo/) for the public Tongo audit report used in the Tongo cryptography footnotes.
+
 ## Contributing
 
 This grid is only as good as the evidence behind it. External contributions are welcome from protocol teams, researchers, and users, with changes reviewed before they are merged.
