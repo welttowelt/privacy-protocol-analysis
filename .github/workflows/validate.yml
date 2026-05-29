@@ -1,0 +1,36 @@
+name: Validate grid data
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check scripts/validate-data.js
+          node --check docs/app.js
+          node --check docs/data.js
+          for file in docs/data_v*.js; do
+            node --check "$file"
+          done
+
+      - name: Validate grid data
+        run: node scripts/validate-data.js
