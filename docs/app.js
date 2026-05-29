@@ -4,12 +4,17 @@
 // per-protocol metric subtext under the tick. All other cells are plain ticks.
 const SCALABLE_COL_IDX = 10;
 
-function escapeAttribute(value) {
+function escapeHtml(value) {
   return String(value)
     .replace(/&/g, '&amp;')
-    .replace(/"/g, '&quot;')
     .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function escapeAttribute(value) {
+  return escapeHtml(value);
 }
 
 function getTickLabel(tick) {
@@ -47,8 +52,8 @@ function renderTick(tick, fnMap, colIdx, metric, gridKind) {
 }
 
 function renderProtocolName(project) {
-  const badge = project.status ? `<span class="protocol-status">${project.status}</span>` : '';
-  return `${project.name}${badge}`;
+  const badge = project.status ? `<span class="protocol-status">${escapeHtml(project.status)}</span>` : '';
+  return `${escapeHtml(project.name)}${badge}`;
 }
 
 function renderGrid(projects, bodyId, isFull) {
@@ -100,7 +105,7 @@ function renderFootnoteSources(note) {
   const links = note.sources.map(id => {
     const source = sourceRefs[id];
     if (!source) return '';
-    return `<a href="${source.url}" target="_blank" rel="noopener">${source.label}</a>`;
+    return `<a href="${escapeAttribute(source.url)}" target="_blank" rel="noopener">${escapeHtml(source.label)}</a>`;
   }).filter(Boolean).join(' <span aria-hidden="true">\u00b7</span> ');
   if (!links) return '';
   return `<div class="footnote-sources"><span>Sources:</span> ${links}</div>`;
@@ -111,7 +116,7 @@ function renderFootnotes(footnotes, containerId, prefix) {
   const sorted = Object.keys(footnotes).map(Number).sort((a, b) => a - b);
   container.innerHTML = sorted.map(n => {
     const note = footnotes[n];
-    return `<div class="footnote-item" id="fn-${prefix}-${n}"><div class="footnote-copy"><sup><a href="#fn-${prefix}-${n}">${n}</a></sup><span>${getFootnoteText(note)}</span></div>${renderFootnoteSources(note)}</div>`;
+    return `<div class="footnote-item" id="fn-${prefix}-${n}"><div class="footnote-copy"><sup><a href="#fn-${prefix}-${n}">${n}</a></sup><span>${escapeHtml(getFootnoteText(note))}</span></div>${renderFootnoteSources(note)}</div>`;
   }).join('');
 }
 
@@ -125,9 +130,9 @@ document.getElementById('footnote-count').textContent = `(${totalFn})`;
 const defList = document.getElementById('definitions-list');
 defList.innerHTML = definitions.map(group => {
   const entries = group.entries.map(e =>
-    `<div class="def-entry"><strong>${e.term}</strong><p>${e.def}</p></div>`
+    `<div class="def-entry"><strong>${escapeHtml(e.term)}</strong><p>${escapeHtml(e.def)}</p></div>`
   ).join('');
-  return `<div class="def-category">${group.category}</div>${entries}`;
+  return `<div class="def-category">${escapeHtml(group.category)}</div>${entries}`;
 }).join('');
 
 function getDefinition(term) {

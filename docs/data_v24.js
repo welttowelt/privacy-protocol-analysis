@@ -1,7 +1,5 @@
 // Website data source — 17 properties x 15 protocols
 
-const SUPERSCRIPTS = {1:"\u00B9",2:"\u00B2",3:"\u00B3",4:"\u2074",5:"\u2075",6:"\u2076",7:"\u2077",8:"\u2078",9:"\u2079",10:"\u00B9\u2070",11:"\u00B9\u00B9",12:"\u00B9\u00B2",13:"\u00B9\u00B3",14:"\u00B9\u2074",15:"\u00B9\u2075",16:"\u00B9\u2076",17:"\u00B9\u2077",18:"\u00B9\u2078",19:"\u00B9\u2079",20:"\u00B2\u2070",21:"\u00B2\u00B9",22:"\u00B2\u00B2",23:"\u00B2\u00B3",24:"\u00B2\u2074",25:"\u00B2\u2075",26:"\u00B2\u2076",27:"\u00B2\u2077",28:"\u00B2\u2078",29:"\u00B2\u2079",30:"\u00B3\u2070"};
-
 const sourceRefs = {
   "strk20-overview": { label: "STRK20 overview", url: "https://strk20.starknet.io/" },
   "starknet-strk20-blog": { label: "Starknet STRK20 announcement", url: "https://www.starknet.io/blog/make-all-erc-20-tokens-private-with-strk20/" },
