@@ -21,7 +21,8 @@ All grid data lives in `docs/data.js`. The website renders the rows, footnotes, 
 3. If adding a partial tick, add a sourced footnote to `fullFootnotes` or `glanceFootnotes` and map it in the protocol's `fnMap`
 4. Update the `definitions` list if the rationale text needs to reflect the change
 5. If your change affects visible counts or summary copy, update the matching text in `docs/index.html` and `README.md`
-6. Preview locally from `docs/` with `python3 -m http.server 8080`
+6. Run `node scripts/validate-data.js`
+7. Preview locally from `docs/` with `python3 -m http.server 8080`
 
 ### Add a protocol
 
@@ -30,7 +31,8 @@ All grid data lives in `docs/data.js`. The website renders the rows, footnotes, 
 3. Add corresponding sourced footnotes for any partial ticks
 4. Add the protocol to `glanceProjects` (At a Glance tab) with the 6 condensed entries
 5. Update any visible count/copy references in `docs/index.html` and `README.md`
-6. Preview locally
+6. Run `node scripts/validate-data.js`
+7. Preview locally
 
 ### Add a property
 
@@ -43,6 +45,12 @@ Update the relevant entry in the `definitions` list. Keep the tone factual and c
 ## Code style
 
 Keep `docs/data.js` readable and explicit. This project favors straightforward data structures over clever abstractions. Footnotes use `sourced("caveat text", ["source-id"])`; add new source IDs to `sourceRefs`.
+
+Before opening a PR, run this from the repo root:
+
+```bash
+node scripts/validate-data.js
+```
 
 ## Review process
 

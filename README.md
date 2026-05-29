@@ -48,6 +48,12 @@ cd docs
 python3 -m http.server 8080
 ```
 
+To validate the grid data before opening a PR, run this from the repo root:
+
+```bash
+node scripts/validate-data.js
+```
+
 ## Maintainers
 
 Current contributions come mainly from StarkWare employees. The project is open to outside issues and pull requests, and submissions are reviewed on merit regardless of affiliation.
