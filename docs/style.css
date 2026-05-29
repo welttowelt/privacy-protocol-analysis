@@ -410,6 +410,18 @@ a:hover { text-decoration: underline; }
   cursor: help;
 }
 
+.tick-with-footnote a,
+.footnote-copy sup a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tick-with-footnote a:focus-visible,
+.footnote-copy sup a:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .tick-full sup,
 .tick-partial sup,
 .tick-dash sup {
@@ -583,6 +595,12 @@ summary:hover { color: var(--accent); }
   font-size: 1.3rem;
   font-weight: 600;
   flex: 0 0 auto;
+}
+
+.footnote-item:target {
+  background: rgba(232, 106, 45, 0.08);
+  border-radius: 4px;
+  padding-left: 6px;
 }
 
 .footnote-sources {

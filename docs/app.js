@@ -4,9 +4,30 @@
 // per-protocol metric subtext under the tick. All other cells are plain ticks.
 const SCALABLE_COL_IDX = 10;
 
-function renderTickInner(tick, fnMap, colIdx) {
+function escapeAttribute(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function getTickLabel(tick) {
+  if (tick === true) return 'full support';
+  if (tick === 'partial') return 'partial support';
+  return 'not supported';
+}
+
+function getColumnTerm(isFull, colIdx) {
+  const item = isFull ? fullColumnTerms[colIdx] : glanceColumnHelp[colIdx];
+  if (!item) return `Column ${colIdx + 1}`;
+  return typeof item === 'string' ? item : item.term;
+}
+
+function renderTickInner(tick, fnMap, colIdx, gridKind) {
   const fnNum = fnMap[colIdx];
-  const sup = fnNum ? `<sup>${fnNum}</sup>` : '';
+  const fnPrefix = gridKind === 'glance' ? 'glance' : 'full';
+  const sup = fnNum ? `<sup><a class="footnote-link" href="#fn-${fnPrefix}-${fnNum}" aria-label="Footnote ${fnNum}">${fnNum}</a></sup>` : '';
   const footnoteClass = fnNum ? ' tick-with-footnote' : '';
   const footnoteData = fnNum ? ` data-fn="${fnNum}"` : '';
   if (tick === true) {
@@ -17,8 +38,8 @@ function renderTickInner(tick, fnMap, colIdx) {
   return `<span class="tick-dash${footnoteClass}"${footnoteData}>\u2013${sup}</span>`;
 }
 
-function renderTick(tick, fnMap, colIdx, metric) {
-  const inner = renderTickInner(tick, fnMap, colIdx);
+function renderTick(tick, fnMap, colIdx, metric, gridKind) {
+  const inner = renderTickInner(tick, fnMap, colIdx, gridKind);
   if (metric) {
     return `<div class="tick-with-metric">${inner}<div class="tick-metric">${metric}</div></div>`;
   }
@@ -32,6 +53,7 @@ function renderProtocolName(project) {
 
 function renderGrid(projects, bodyId, isFull) {
   const tbody = document.getElementById(bodyId);
+  const gridKind = isFull ? 'full' : 'glance';
   tbody.innerHTML = projects.map((p, rowIdx) => {
     const classes = [
       p.highlight ? 'highlight' : '',
@@ -40,7 +62,12 @@ function renderGrid(projects, bodyId, isFull) {
     const cls = classes ? ` class="${classes}"` : '';
     const cells = p.ticks.map((t, i) => {
       const metric = (isFull && i === SCALABLE_COL_IDX && p.scalable) ? p.scalable : null;
-      return `<td>${renderTick(t, p.fnMap, i, metric)}</td>`;
+      const fnNum = p.fnMap?.[i];
+      const term = getColumnTerm(isFull, i);
+      const ariaParts = [`${p.name}: ${term}: ${getTickLabel(t)}`];
+      if (metric) ariaParts.push(`metric ${metric}`);
+      if (fnNum) ariaParts.push(`footnote ${fnNum}`);
+      return `<td aria-label="${escapeAttribute(ariaParts.join(', '))}">${renderTick(t, p.fnMap || {}, i, metric, gridKind)}</td>`;
     }).join('');
     return `<tr${cls}><td class="sticky-col protocol-name">${renderProtocolName(p)}</td>${cells}</tr>`;
   }).join('');
@@ -79,17 +106,17 @@ function renderFootnoteSources(note) {
   return `<div class="footnote-sources"><span>Sources:</span> ${links}</div>`;
 }
 
-function renderFootnotes(footnotes, containerId) {
+function renderFootnotes(footnotes, containerId, prefix) {
   const container = document.getElementById(containerId);
   const sorted = Object.keys(footnotes).map(Number).sort((a, b) => a - b);
   container.innerHTML = sorted.map(n => {
     const note = footnotes[n];
-    return `<div class="footnote-item"><div class="footnote-copy"><sup>${n}</sup><span>${getFootnoteText(note)}</span></div>${renderFootnoteSources(note)}</div>`;
+    return `<div class="footnote-item" id="fn-${prefix}-${n}"><div class="footnote-copy"><sup><a href="#fn-${prefix}-${n}">${n}</a></sup><span>${getFootnoteText(note)}</span></div>${renderFootnoteSources(note)}</div>`;
   }).join('');
 }
 
-renderFootnotes(fullFootnotes, 'footnotes-full-list');
-renderFootnotes(glanceFootnotes, 'footnotes-glance-list');
+renderFootnotes(fullFootnotes, 'footnotes-full-list', 'full');
+renderFootnotes(glanceFootnotes, 'footnotes-glance-list', 'glance');
 
 const totalFn = Object.keys(fullFootnotes).length + Object.keys(glanceFootnotes).length;
 document.getElementById('footnote-count').textContent = `(${totalFn})`;
@@ -122,6 +149,7 @@ function attachHeaderTooltips(tableId, terms) {
     header.classList.add('has-column-help');
     header.dataset.columnHelp = help;
     header.setAttribute('aria-label', `${term}: ${help}`);
+    header.tabIndex = 0;
     header.insertAdjacentHTML('beforeend', '<span class="column-help-dot" aria-hidden="true">?</span>');
   });
 }
@@ -136,23 +164,51 @@ attachHeaderTooltips('glance-grid', glanceColumnHelp);
 // would show the wrong footnote.
 const tooltip = document.getElementById('tooltip');
 
-document.addEventListener('mouseover', (e) => {
-  const header = e.target.closest('[data-column-help]');
-  if (header) {
-    tooltip.textContent = header.dataset.columnHelp;
-    tooltip.classList.add('visible');
-    return;
-  }
+function getTooltipText(target) {
+  const header = target.closest('[data-column-help]');
+  if (header) return header.dataset.columnHelp;
 
-  const footnoted = e.target.closest('.tick-with-footnote');
-  if (!footnoted) return;
+  const footnoted = target.closest('.tick-with-footnote');
+  if (!footnoted) return '';
   const fnNum = parseInt(footnoted.dataset.fn);
-  if (!fnNum) return;
+  if (!fnNum) return '';
   const footnotes = footnoted.closest('.glance-grid') ? glanceFootnotes : fullFootnotes;
   const note = footnotes[fnNum];
-  if (!note) return;
-  tooltip.textContent = getFootnoteText(note);
+  return note ? getFootnoteText(note) : '';
+}
+
+function positionTooltipNearElement(element) {
+  const rect = element.getBoundingClientRect();
+  const x = Math.min(rect.left + 12, window.innerWidth - tooltip.offsetWidth - 16);
+  const y = Math.min(rect.bottom + 8, window.innerHeight - tooltip.offsetHeight - 16);
+  tooltip.style.left = Math.max(16, x) + 'px';
+  tooltip.style.top = Math.max(16, y) + 'px';
+}
+
+document.addEventListener('mouseover', (e) => {
+  const text = getTooltipText(e.target);
+  if (!text) return;
+  tooltip.textContent = text;
   tooltip.classList.add('visible');
+});
+
+document.addEventListener('focusin', (e) => {
+  const text = getTooltipText(e.target);
+  if (!text) return;
+  tooltip.textContent = text;
+  tooltip.classList.add('visible');
+  positionTooltipNearElement(e.target);
+});
+
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('.footnote-link');
+  if (!link) return;
+  const target = document.querySelector(link.getAttribute('href'));
+  if (!target) return;
+  const details = target.closest('details');
+  if (details) {
+    details.open = true;
+  }
 });
 
 document.addEventListener('mousemove', (e) => {
@@ -168,6 +224,11 @@ document.addEventListener('mouseout', (e) => {
   if (tooltipTarget) tooltip.classList.remove('visible');
 });
 
+document.addEventListener('focusout', (e) => {
+  const tooltipTarget = e.target.closest('[data-column-help], .tick-with-footnote');
+  if (tooltipTarget) tooltip.classList.remove('visible');
+});
+
 // === Twitter/X share links ===
 const siteUrl = 'https://privacygrid.dev/';
 const fullProtocolCount = fullProjects.length;
@@ -175,7 +236,7 @@ const fullPropertyCount = fullProjects[0]?.ticks.length || 0;
 const glancePropertyCount = glanceProjects[0]?.ticks.length || 0;
 
 const fullShareText = `Privacy Protocol Grid — ${fullProtocolCount} protocols, ${fullPropertyCount} properties, sources listed in footnotes.\n\nWho\u2019s building what in crypto privacy.\n\n${siteUrl}`;
-const glanceShareText = `Privacy Protocols at a Glance — ${fullProtocolCount} protocols, ${glancePropertyCount} properties that matter most.\n\n${siteUrl}`;
+const glanceShareText = `Privacy Protocols at a Glance — ${fullProtocolCount} protocols, ${glancePropertyCount} high-signal properties.\n\n${siteUrl}`;
 
 document.getElementById('share-full-twitter').href =
   'https://x.com/intent/tweet?text=' + encodeURIComponent(fullShareText);
