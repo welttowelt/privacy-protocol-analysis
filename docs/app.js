@@ -29,8 +29,22 @@ function getColumnTerm(isFull, colIdx) {
   return typeof item === 'string' ? item : item.term;
 }
 
+function getFootnoteNumber(fnMap, colIdx) {
+  const num = Number(fnMap?.[colIdx]);
+  return Number.isInteger(num) && num > 0 ? num : null;
+}
+
+function isSafeHttpUrl(value) {
+  try {
+    const url = new URL(String(value));
+    return url.protocol === 'https:' || url.protocol === 'http:';
+  } catch {
+    return false;
+  }
+}
+
 function renderTickInner(tick, fnMap, colIdx, gridKind) {
-  const fnNum = fnMap[colIdx];
+  const fnNum = getFootnoteNumber(fnMap, colIdx);
   const fnPrefix = gridKind === 'glance' ? 'glance' : 'full';
   const sup = fnNum ? `<sup><a class="footnote-link" href="#fn-${fnPrefix}-${fnNum}" aria-label="Footnote ${fnNum}">${fnNum}</a></sup>` : '';
   const footnoteClass = fnNum ? ' tick-with-footnote' : '';
@@ -67,7 +81,7 @@ function renderGrid(projects, bodyId, isFull) {
     const cls = classes ? ` class="${classes}"` : '';
     const cells = p.ticks.map((t, i) => {
       const metric = (isFull && i === SCALABLE_COL_IDX && p.scalable) ? p.scalable : null;
-      const fnNum = p.fnMap?.[i];
+      const fnNum = getFootnoteNumber(p.fnMap, i);
       const term = getColumnTerm(isFull, i);
       const ariaParts = [`${p.name}: ${term}: ${getTickLabel(t)}`];
       if (metric) ariaParts.push(`metric ${metric}`);
@@ -104,7 +118,7 @@ function renderFootnoteSources(note) {
   if (typeof note === 'string' || !note.sources?.length) return '';
   const links = note.sources.map(id => {
     const source = sourceRefs[id];
-    if (!source) return '';
+    if (!source || !isSafeHttpUrl(source.url)) return '';
     return `<a href="${escapeAttribute(source.url)}" target="_blank" rel="noopener">${escapeHtml(source.label)}</a>`;
   }).filter(Boolean).join(' <span aria-hidden="true">\u00b7</span> ');
   if (!links) return '';
