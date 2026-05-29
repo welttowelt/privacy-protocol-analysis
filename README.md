@@ -56,7 +56,7 @@ node scripts/validate-data.js
 
 ## Maintainers
 
-Current contributions come mainly from StarkWare employees. The project is open to outside issues and pull requests, and submissions are reviewed on merit regardless of affiliation.
+Some contributors are StarkWare-affiliated. The project is open to outside issues and pull requests.
 
 ## Acknowledgements
 
