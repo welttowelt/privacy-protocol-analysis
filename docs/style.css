@@ -203,8 +203,46 @@ a:hover { text-decoration: underline; }
 
 .tab-bar {
   display: flex;
+  align-items: flex-end;
   gap: 2px;
   margin-bottom: 20px;
+}
+
+/* Scroll hint, right-aligned in the tab bar so it never covers a data cell.
+   JS unhides it only while the active grid actually overflows. */
+.scroll-hint {
+  margin-left: auto;
+  padding-bottom: 8px;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.scroll-hint[hidden] { display: none; }
+
+.scroll-hint-arrow {
+  display: inline-block;
+  color: var(--accent);
+  animation: scroll-nudge 1.6s ease-in-out infinite;
+}
+
+@keyframes scroll-nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-hint-arrow { animation: none; }
+}
+
+/* Narrow screens: the column count would squeeze the tabs into wrapping,
+   and "scroll →" alone carries the message. */
+@media (max-width: 860px) {
+  .scroll-hint-count { display: none; }
 }
 
 .tab {
@@ -251,6 +289,78 @@ a:hover { text-decoration: underline; }
   -webkit-overflow-scrolling: touch;
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  /* Contain the sticky first column (z-index: 10) so the edge fades below,
+     which sit outside this box, always paint on top of it. */
+  isolation: isolate;
+}
+
+/* macOS hides overlay scrollbars until you scroll, so the grid looks like it
+   ends at the viewport edge. Force a permanently visible track instead. */
+.grid-scroll::-webkit-scrollbar {
+  height: 10px;
+}
+
+.grid-scroll::-webkit-scrollbar-track {
+  background: var(--dark-alt);
+  border-top: 1px solid var(--border);
+}
+
+.grid-scroll::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 5px;
+}
+
+.grid-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-dim);
+}
+
+/* Firefox. Gated so it does not override the rules above in Blink/WebKit,
+   where the standard properties win and hand back overlay behaviour. */
+@supports not selector(::-webkit-scrollbar) {
+  .grid-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--muted) var(--dark-alt);
+  }
+}
+
+/* Edge fades: the "there is more over here" cue while mid-scroll. */
+.scroll-frame { position: relative; }
+
+.scroll-frame::before,
+.scroll-frame::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  width: 56px;
+  z-index: 11;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Starts at the sticky Protocol column's right edge, not the frame's, so the
+   pinned column never fades out. JS measures the width. */
+.scroll-frame::before {
+  left: var(--sticky-col-width, 0px);
+  background: linear-gradient(to right, var(--dark) 0%, rgba(12, 10, 24, 0) 100%);
+}
+
+.scroll-frame::after {
+  right: 1px;
+  background: linear-gradient(to left, var(--dark) 0%, rgba(12, 10, 24, 0) 100%);
+}
+
+.scroll-frame.can-scroll-left::before,
+.scroll-frame.can-scroll-right::after {
+  opacity: 1;
+}
+
+/* On phones the pinned column leaves only ~120px of data visible, so two
+   full-width fades would obscure most of it. */
+@media (max-width: 860px) {
+  .scroll-frame::before,
+  .scroll-frame::after { width: 24px; }
 }
 
 .protocol-grid {
