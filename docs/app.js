@@ -261,3 +261,54 @@ document.getElementById('share-full-twitter').href =
   'https://x.com/intent/tweet?text=' + encodeURIComponent(fullShareText);
 document.getElementById('share-glance-twitter').href =
   'https://x.com/intent/tweet?text=' + encodeURIComponent(glanceShareText);
+
+// === Horizontal scroll affordance ===
+// The grids are wider than the viewport, but macOS overlay scrollbars stay
+// hidden until you scroll, so nothing signals that more columns exist. Show
+// edge fades on the scrollable sides plus a hint in the tab bar.
+const SCROLL_EPSILON = 2; // sub-pixel layout slack
+
+const scrollHint = document.getElementById('scroll-hint');
+const scrollHintCount = document.getElementById('scroll-hint-count');
+
+const scrollFrames = [...document.querySelectorAll('.scroll-frame')].map(frame => ({
+  frame,
+  scroller: frame.querySelector('.grid-scroll'),
+  columnCount: frame.querySelectorAll('.header-row th:not(.sticky-col)').length,
+}));
+
+function updateScrollAffordance() {
+  scrollFrames.forEach(({ frame, scroller, columnCount }) => {
+    const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+    const overflows = maxScroll > SCROLL_EPSILON;
+    frame.classList.toggle('can-scroll-left', overflows && scroller.scrollLeft > SCROLL_EPSILON);
+    frame.classList.toggle('can-scroll-right', overflows && scroller.scrollLeft < maxScroll - SCROLL_EPSILON);
+
+    const stickyCol = scroller.querySelector('.sticky-col');
+    if (stickyCol) frame.style.setProperty('--sticky-col-width', stickyCol.offsetWidth + 'px');
+
+    // A hidden grid measures 0 and is not the one being looked at.
+    if (!frame.closest('.grid-wrapper').classList.contains('hidden')) {
+      scrollHint.hidden = !overflows;
+      if (overflows) scrollHintCount.textContent = `${columnCount} columns · `;
+    }
+  });
+}
+
+scrollFrames.forEach(({ scroller }) => {
+  scroller.addEventListener('scroll', updateScrollAffordance, { passive: true });
+  new ResizeObserver(updateScrollAffordance).observe(scroller);
+});
+
+window.addEventListener('resize', updateScrollAffordance);
+
+// Registered after the tab handler above, so it runs once the wrapper has
+// been unhidden and the newly visible grid can actually be measured.
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', updateScrollAffordance);
+});
+
+// Table width depends on JetBrains Mono / DM Sans, so the first measurement
+// can land on fallback metrics.
+if (document.fonts) document.fonts.ready.then(updateScrollAffordance);
+updateScrollAffordance();
